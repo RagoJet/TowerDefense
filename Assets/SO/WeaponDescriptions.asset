@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13064753651847e79aa940cda15b5071, type: 3}
+  m_Name: WeaponDescriptions
+  m_EditorClassIdentifier: 
+  listRocketLauncher:
+  - {fileID: 11400000, guid: 31c15b80b2e88ff45bcb0050dad7624d, type: 2}
+  - {fileID: 11400000, guid: f970766eb9df1084997a6e6a2081c5b4, type: 2}
+  - {fileID: 11400000, guid: 0c79fab0194587247a5e6fcc36f55e1e, type: 2}
+  - {fileID: 11400000, guid: 21d296019c7f3644c96d1cc0d31c964f, type: 2}
+  listBigRocketLauncher: []
+  listCatapult: []
