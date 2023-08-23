@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 public class LazyWeaponPool{
-    Dictionary<DataWeapon, Queue<Weapon>> WeaponDictionary = new();
+    readonly Dictionary<DataWeapon, Queue<Weapon>> WeaponDictionary = new();
 
     public void Init(){
         WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 1)] = new Queue<Weapon>();

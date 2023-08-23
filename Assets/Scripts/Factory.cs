@@ -4,37 +4,33 @@ public class Factory : MonoBehaviour{
     [SerializeField] private WeaponDescriptions weaponDescriptions;
     [SerializeField] private Cells cells;
 
-
-    private LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
+    private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
 
     private void Awake(){
         _lazyWeaponPool.Init();
     }
 
     public void TryBuyRocketLauncher(){
-        var cell = cells.TryGetAvailableCell();
-        if (cell != null){
-            CreateRocketLauncher1().SetPosition(cell);
+        if (cells.TryGetCell(out var cell)){
+            CreateFirstLevelWeapon(TypeWeapon.RocketLauncher).OccupyTheCage(cell);
         }
     }
 
     public void TryBuyBigRocketLauncher(){
-        var cell = cells.TryGetAvailableCell();
-        if (cell != null){
-            CreateBigRocketLauncher1().SetPosition(cell);
+        if (cells.TryGetCell(out var cell)){
+            CreateFirstLevelWeapon(TypeWeapon.BigRocketLauncher).OccupyTheCage(cell);
         }
     }
 
     public void TryBuyCatapult(){
-        var cell = cells.TryGetAvailableCell();
-        if (cell != null){
-            CreateCatapult1().SetPosition(cell);
+        if (cells.TryGetCell(out var cell)){
+            CreateFirstLevelWeapon(TypeWeapon.Catapult).OccupyTheCage(cell);
         }
     }
 
 
-    private Weapon CreateRocketLauncher1(){
-        DataWeapon dataWeapon = new DataWeapon(TypeWeapon.RocketLauncher, 1);
+    private Weapon CreateFirstLevelWeapon(TypeWeapon typeWeapon){
+        DataWeapon dataWeapon = new DataWeapon(typeWeapon, 1);
         Weapon weapon = _lazyWeaponPool.TryGetWeapon(dataWeapon);
         if (weapon == null){
             weapon = CreateWeapon(dataWeapon);
@@ -42,27 +38,6 @@ public class Factory : MonoBehaviour{
 
         return weapon;
     }
-
-    private Weapon CreateBigRocketLauncher1(){
-        DataWeapon dataWeapon = new DataWeapon(TypeWeapon.BigRocketLauncher, 1);
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(dataWeapon);
-        if (weapon == null){
-            weapon = CreateWeapon(dataWeapon);
-        }
-
-        return weapon;
-    }
-
-    private Weapon CreateCatapult1(){
-        DataWeapon dataWeapon = new DataWeapon(TypeWeapon.Catapult, 1);
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(dataWeapon);
-        if (weapon == null){
-            weapon = CreateWeapon(dataWeapon);
-        }
-
-        return weapon;
-    }
-
 
     private Weapon CreateWeapon(DataWeapon dataWeapon){
         int index = dataWeapon._level - 1;

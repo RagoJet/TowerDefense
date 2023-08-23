@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 
+
+
 public class Weapon : MonoBehaviour{
     private WeaponDescription _description;
     private Cell _cell;
 
-    public void SetPosition(Cell cell){
+    public void OccupyTheCage(Cell cell){
         _cell = cell;
         transform.position = _cell.GetPosition();
         cell.MakeOccupied();

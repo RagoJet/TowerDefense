@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7719386892303892715}
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7722013863782262131}
@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 7719611600968210079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7722063493079705255}
@@ -5071,6 +5071,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7722013863782262131}
   - component: {fileID: -2341582514345566097}
+  - component: {fileID: 5459032180018305611}
   m_Layer: 0
   m_Name: CatapultLevelOne
   m_TagString: Untagged
@@ -5107,6 +5108,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2774dddd1ef40d6a1f99eb37849b2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5459032180018305611
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7720123541026943169}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &7721000072307494923
 GameObject:
   m_ObjectHideFlags: 0

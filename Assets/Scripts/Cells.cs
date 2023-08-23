@@ -3,18 +3,18 @@ using UnityEngine;
 public class Cells : MonoBehaviour{
     private Cell[] _arrayCells;
 
-
     private void Awake(){
         _arrayCells = GetComponentsInChildren<Cell>();
     }
 
-    public Cell TryGetAvailableCell(){
+    public bool TryGetCell(out Cell theCell){
         foreach (var cell in _arrayCells){
-            if (cell.IsAvailable()){
-                return cell;
-            }
+            if (!cell.IsAvailable()) continue;
+            theCell = cell;
+            return true;
         }
 
-        return null;
+        theCell = null;
+        return false;
     }
 }

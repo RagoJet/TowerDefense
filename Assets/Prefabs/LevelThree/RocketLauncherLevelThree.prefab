@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2637263968691822299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2636114308840772975}
@@ -5203,7 +5203,7 @@ Transform:
   m_GameObject: {fileID: 2638833013153806981}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2635825479364295843}
@@ -5353,6 +5353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2635825479364295843}
   - component: {fileID: 5355518561716471056}
+  - component: {fileID: 5056331777600356589}
   m_Layer: 0
   m_Name: RocketLauncherLevelThree
   m_TagString: Untagged
@@ -5389,3 +5390,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2774dddd1ef40d6a1f99eb37849b2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5056331777600356589
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2638977334706149309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 1.2, z: 1.25}
+  m_Center: {x: 0, y: 0.6, z: 0}
