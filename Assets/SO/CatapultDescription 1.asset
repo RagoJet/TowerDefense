@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbcb5c7e48734bdba802e62d91013636, type: 3}
-  m_Name: RocketLauncherDescriptionL3
+  m_Name: CatapultDescription 1
   m_EditorClassIdentifier: 
-  damage: 0
-  reloadTime: 0
-  attackDelay: 0
-  rangeAttack: 0
-  meshRenderer: {fileID: 0}
+  _dataWeapon:
+    _typeWeapon: 2
+    _level: 1
+  damage: 10
+  attackDelay: 2
+  cooldown: 5
+  rangeAttack: 5
+  bulletPrefab: {fileID: 0}
+  weaponPrefab: {fileID: -2341582514345566097, guid: d12fe3eceb56c4f4985e2e95e7f4eb33,
+    type: 3}

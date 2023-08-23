@@ -13,9 +13,17 @@ MonoBehaviour:
   m_Name: WeaponDescriptions
   m_EditorClassIdentifier: 
   listRocketLauncher:
-  - {fileID: 11400000, guid: 31c15b80b2e88ff45bcb0050dad7624d, type: 2}
-  - {fileID: 11400000, guid: f970766eb9df1084997a6e6a2081c5b4, type: 2}
-  - {fileID: 11400000, guid: 0c79fab0194587247a5e6fcc36f55e1e, type: 2}
-  - {fileID: 11400000, guid: 21d296019c7f3644c96d1cc0d31c964f, type: 2}
-  listBigRocketLauncher: []
-  listCatapult: []
+  - {fileID: 11400000, guid: 191d8d7fa5107af448af3f19632e2d35, type: 2}
+  - {fileID: 11400000, guid: 434c888961b8e464b9a0e1b1f6a422ac, type: 2}
+  - {fileID: 11400000, guid: c06eafb07496ae54da5bf5d15e254078, type: 2}
+  - {fileID: 11400000, guid: aba34eeb647b1af42ac95c8c746e3027, type: 2}
+  listBigRocketLauncher:
+  - {fileID: 11400000, guid: 64503370c34d08c4e9f61bf66615d0cf, type: 2}
+  - {fileID: 11400000, guid: 6e4b45c034f9e4144b07fafb855457ea, type: 2}
+  - {fileID: 11400000, guid: 7c47339b63ad6ab42b9cef12f5e36934, type: 2}
+  - {fileID: 11400000, guid: 7ebbb9783abd40941a6eb06e49b58fe8, type: 2}
+  listCatapult:
+  - {fileID: 11400000, guid: e89be66be8afe6c48b5517559c762422, type: 2}
+  - {fileID: 11400000, guid: a71d4ac5ebdb6754d91beb77d450d8e9, type: 2}
+  - {fileID: 11400000, guid: 16a1c67fbb4359349aa28316c2c56ef8, type: 2}
+  - {fileID: 11400000, guid: f5338c4eed127924aa2e24500b9578f9, type: 2}

@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbcb5c7e48734bdba802e62d91013636, type: 3}
-  m_Name: RocketLauncherDescriptionL1
+  m_Name: RocketDescription 4
   m_EditorClassIdentifier: 
-  damage: 0
-  reloadTime: 0
-  attackDelay: 0
-  rangeAttack: 0
-  meshRenderer: {fileID: 0}
+  _dataWeapon:
+    _typeWeapon: 0
+    _level: 4
+  damage: 10
+  attackDelay: 2
+  cooldown: 5
+  rangeAttack: 5
+  bulletPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 979110936974816515, guid: 74d6c67990d008f40ad8ac775f18f0dc,
+    type: 3}

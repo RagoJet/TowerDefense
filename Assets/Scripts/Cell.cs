@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour{
     private bool _available = true;
-    [SerializeField] private Transform turretTransform;
+    [SerializeField] private Transform cellTransform;
 
 
-    // public void SetAWeapon(Weapon weapon){
-    //     weapon.transform.position = turretTransform.position;
-    // }
+    public Vector3 GetPosition(){
+        return cellTransform.position;
+    }
 
     public bool IsAvailable(){
         return _available;

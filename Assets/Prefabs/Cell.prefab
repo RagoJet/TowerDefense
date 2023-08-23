@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b043605ad60f264eb78a89a16e75ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretTransform: {fileID: 360702144265836065}
+  cellTransform: {fileID: 360702144265836065}
 --- !u!65 &2085890379559388490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.5120525, y: 1.5277357, z: 6.294814}
-  m_Center: {x: -0.040169355, y: 0.76386666, z: -0.17918742}
+  m_Size: {x: 6, y: 4, z: 6}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &2661598230731313418
 GameObject:
   m_ObjectHideFlags: 0
