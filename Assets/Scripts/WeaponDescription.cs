@@ -3,9 +3,9 @@ using UnityEngine;
 
 [Serializable]
 public enum TypeWeapon{
-    RocketLauncher,
-    BigRocketLauncher,
-    Catapult
+    Catapult = 1,
+    RocketLauncher = 2,
+    BigRocketLauncher = 3
 }
 
 [Serializable]

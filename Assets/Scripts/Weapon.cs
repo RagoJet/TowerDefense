@@ -6,7 +6,6 @@ public class Weapon : MonoBehaviour{
 
     private Cell _cell;
     private Factory _factory;
-    private Collider _collider;
 
     public void Construct(WeaponDescription description, Factory factory, Cell cell){
         _description = description;
@@ -17,12 +16,6 @@ public class Weapon : MonoBehaviour{
     public void Construct(Cell cell){
         OccupyTheCell(cell);
     }
-
-
-    private void Awake(){
-        _collider = GetComponent<Collider>();
-    }
-
 
     private void ReturnPositionToCell(){
         transform.position = _cell.GetPosition();
@@ -38,7 +31,6 @@ public class Weapon : MonoBehaviour{
         _cell.MakeAvailable();
         _cell = null;
     }
-
 
     public DataWeapon GetDataWeapon(){
         return _description._dataWeapon;
@@ -59,12 +51,18 @@ public class Weapon : MonoBehaviour{
     }
 
     private void OnMouseUp(){
-        _collider.enabled = false;
-        Collider[] colliders = Physics.OverlapBox(transform.position + Vector3.down * 1.5f, transform.localScale / 2f,
-            Quaternion.identity);
-        foreach (var colllider in colliders){
-            if (colllider.TryGetComponent(out Weapon weapon)){
-                _collider.enabled = true;
+        Ray ray = new Ray();
+        ray.origin = transform.position;
+        ray.direction = Vector3.down;
+
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
+
+        foreach (RaycastHit hit in hits){
+            if (hit.collider.TryGetComponent(out Weapon weapon)){
+                if (weapon == this){
+                    continue;
+                }
+
                 if (this.GetDataWeapon().Equals(weapon.GetDataWeapon())){
                     this.FreeTheCell();
                     _factory.MergeWeapons(this, weapon, weapon._cell);
@@ -77,16 +75,14 @@ public class Weapon : MonoBehaviour{
             }
         }
 
-        foreach (var colllider in colliders){
-            if (colllider.TryGetComponent(out Cell cell)){
+        foreach (RaycastHit hit in hits){
+            if (hit.collider.TryGetComponent(out Cell cell)){
                 FreeTheCell();
                 OccupyTheCell(cell);
-                _collider.enabled = true;
                 return;
             }
         }
 
         ReturnPositionToCell();
-        _collider.enabled = true;
     }
 }

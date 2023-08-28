@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RocketDescription 4
   m_EditorClassIdentifier: 
   _dataWeapon:
-    _typeWeapon: 0
+    _typeWeapon: 2
     _level: 4
   damage: 10
   attackDelay: 2

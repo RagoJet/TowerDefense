@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CatapultDescription 2
   m_EditorClassIdentifier: 
   _dataWeapon:
-    _typeWeapon: 2
+    _typeWeapon: 1
     _level: 2
   damage: 10
   attackDelay: 2

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BigRocketLauncher 1
   m_EditorClassIdentifier: 
   _dataWeapon:
-    _typeWeapon: 1
+    _typeWeapon: 3
     _level: 1
   damage: 10
   attackDelay: 2

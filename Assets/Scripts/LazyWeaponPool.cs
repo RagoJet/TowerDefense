@@ -4,6 +4,10 @@ public class LazyWeaponPool{
     readonly Dictionary<DataWeapon, Queue<Weapon>> WeaponDictionary = new();
 
     public void Init(){
+        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 1)] = new Queue<Weapon>();
+        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 2)] = new Queue<Weapon>();
+        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 3)] = new Queue<Weapon>();
+        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 4)] = new Queue<Weapon>();
         WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 1)] = new Queue<Weapon>();
         WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 2)] = new Queue<Weapon>();
         WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 3)] = new Queue<Weapon>();
@@ -12,10 +16,6 @@ public class LazyWeaponPool{
         WeaponDictionary[new DataWeapon(TypeWeapon.BigRocketLauncher, 2)] = new Queue<Weapon>();
         WeaponDictionary[new DataWeapon(TypeWeapon.BigRocketLauncher, 3)] = new Queue<Weapon>();
         WeaponDictionary[new DataWeapon(TypeWeapon.BigRocketLauncher, 4)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 1)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 2)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 3)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 4)] = new Queue<Weapon>();
     }
 
     public void HideWeapon(Weapon weapon){
