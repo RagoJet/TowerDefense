@@ -3,8 +3,7 @@
 public class Factory : MonoBehaviour{
     [SerializeField] private WeaponDescriptions weaponDescriptions;
     [SerializeField] private Cells cells;
-    [SerializeField] private int maxLevelWeapons = 4;
-    [SerializeField] private int maxLevelType = 3;
+    [SerializeField] private int maxLevelWeapons = 24;
 
     private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
 
@@ -23,60 +22,37 @@ public class Factory : MonoBehaviour{
     }
 
     private Weapon CreateFirstLevelWeapon(Cell cell){
-        DataWeapon dataWeapon = new DataWeapon((TypeWeapon) 1, 1);
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(dataWeapon);
+        Weapon weapon = _lazyWeaponPool.TryGetWeapon(1);
         if (weapon == null){
-            weapon = CreateWeapon(dataWeapon, cell);
+            weapon = CreateWeapon(1, cell);
         }
 
         weapon.Construct(cell);
         return weapon;
     }
 
-    private Weapon CreateWeapon(DataWeapon dataWeapon, Cell cell){
-        int index = dataWeapon._level - 1;
+    private Weapon CreateWeapon(int levelWeapon, Cell cell){
+        int index = levelWeapon - 1;
         Weapon weapon;
-        switch (dataWeapon._typeWeapon){
-            case TypeWeapon.Catapult:
-                weapon = Instantiate(weaponDescriptions.ListCatapult[index].weaponPrefab);
-                weapon.Construct(weaponDescriptions.ListCatapult[index], this, cell);
-                break;
-            case TypeWeapon.RocketLauncher:
-                weapon = Instantiate(weaponDescriptions.ListRocketLauncher[index].weaponPrefab);
-                weapon.Construct(weaponDescriptions.ListRocketLauncher[index], this, cell);
-                break;
-
-            case TypeWeapon.BigRocketLauncher:
-                weapon = Instantiate(weaponDescriptions.ListBigRocketLauncher[index].weaponPrefab);
-                weapon.Construct(weaponDescriptions.ListBigRocketLauncher[index], this, cell);
-                break;
-            default: return null;
-        }
+        weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
+        weapon.Construct(weaponDescriptions.ListWeapons[index], this, cell);
 
         return weapon;
     }
 
     public bool TryMergeWeapons(Weapon weapon1, Weapon weapon2, Cell cell){
-        DataWeapon dataWeapon = weapon1.GetDataWeapon();
-
-        TypeWeapon typeWeapon = dataWeapon._typeWeapon;
-        int newLevel = dataWeapon._level + 1;
+        int newLevel = weapon1.GetLevelWeapon() + 1;
 
         if (newLevel > maxLevelWeapons){
-            if (typeWeapon < (TypeWeapon) maxLevelType){
-                typeWeapon = dataWeapon._typeWeapon + 1;
-                newLevel = 1;
-            }
-            else return false;
+            return false;
         }
 
-        DataWeapon newDataWeapon = new DataWeapon(typeWeapon, newLevel);
         HideWeapon(weapon1);
         HideWeapon(weapon2);
 
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(newDataWeapon);
+        Weapon weapon = _lazyWeaponPool.TryGetWeapon(newLevel);
         if (weapon == null){
-            weapon = CreateWeapon(newDataWeapon, cell);
+            weapon = CreateWeapon(newLevel, cell);
         }
         else{
             weapon.Construct(cell);

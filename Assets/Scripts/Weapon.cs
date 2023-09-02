@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class Weapon : MonoBehaviour{
@@ -37,8 +36,8 @@ public class Weapon : MonoBehaviour{
         _cell = null;
     }
 
-    public DataWeapon GetDataWeapon(){
-        return _description._dataWeapon;
+    public int GetLevelWeapon(){
+        return _description.level;
     }
 
     private void OnMouseDrag(){
@@ -68,7 +67,7 @@ public class Weapon : MonoBehaviour{
                     continue;
                 }
 
-                if (this.GetDataWeapon().Equals(weapon.GetDataWeapon())){
+                if (this.GetLevelWeapon() == weapon.GetLevelWeapon()){
                     ref Cell tempCell = ref _cell;
                     // this.FreeTheCell();
                     if (_factory.TryMergeWeapons(this, weapon, weapon._cell) == false){

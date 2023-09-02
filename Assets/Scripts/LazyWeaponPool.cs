@@ -1,31 +1,22 @@
 ﻿using System.Collections.Generic;
 
 public class LazyWeaponPool{
-    readonly Dictionary<DataWeapon, Queue<Weapon>> WeaponDictionary = new();
+    readonly Dictionary<int, Queue<Weapon>> WeaponDictionary = new();
 
     public void Init(){
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 1)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 2)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 3)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.Catapult, 4)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 1)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 2)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 3)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.RocketLauncher, 4)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.BigRocketLauncher, 1)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.BigRocketLauncher, 2)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.BigRocketLauncher, 3)] = new Queue<Weapon>();
-        WeaponDictionary[new DataWeapon(TypeWeapon.BigRocketLauncher, 4)] = new Queue<Weapon>();
+        for (int i = 1; i < 24; i++){
+            WeaponDictionary[i] = new Queue<Weapon>();
+        }
     }
 
     public void HideWeapon(Weapon weapon){
-        Queue<Weapon> queue = WeaponDictionary[weapon.GetDataWeapon()];
+        Queue<Weapon> queue = WeaponDictionary[weapon.GetLevelWeapon()];
         queue.Enqueue(weapon);
         weapon.gameObject.SetActive(false);
     }
 
-    public Weapon TryGetWeapon(DataWeapon dataWeapon){
-        if (WeaponDictionary[dataWeapon].TryDequeue(out var weapon)){
+    public Weapon TryGetWeapon(int levelWeapon){
+        if (WeaponDictionary[levelWeapon].TryDequeue(out var weapon)){
             weapon.gameObject.SetActive(true);
         }
 
