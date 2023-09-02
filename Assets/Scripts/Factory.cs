@@ -56,7 +56,7 @@ public class Factory : MonoBehaviour{
         return weapon;
     }
 
-    public Weapon MergeWeapons(Weapon weapon1, Weapon weapon2, Cell cell){
+    public bool TryMergeWeapons(Weapon weapon1, Weapon weapon2, Cell cell){
         DataWeapon dataWeapon = weapon1.GetDataWeapon();
 
         TypeWeapon typeWeapon = dataWeapon._typeWeapon;
@@ -67,6 +67,7 @@ public class Factory : MonoBehaviour{
                 typeWeapon = dataWeapon._typeWeapon + 1;
                 newLevel = 1;
             }
+            else return false;
         }
 
         DataWeapon newDataWeapon = new DataWeapon(typeWeapon, newLevel);
@@ -81,6 +82,6 @@ public class Factory : MonoBehaviour{
             weapon.Construct(cell);
         }
 
-        return weapon;
+        return true;
     }
 }

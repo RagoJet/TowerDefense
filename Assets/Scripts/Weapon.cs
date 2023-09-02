@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class Weapon : MonoBehaviour{
@@ -15,6 +16,10 @@ public class Weapon : MonoBehaviour{
 
     public void Construct(Cell cell){
         OccupyTheCell(cell);
+    }
+
+    private void OnDisable(){
+        FreeTheCell();
     }
 
     private void ReturnPositionToCell(){
@@ -44,7 +49,7 @@ public class Weapon : MonoBehaviour{
         int islandLayerMask = 1 << LayerMask.NameToLayer("Island");
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, islandLayerMask)){
             if (hit.collider.TryGetComponent(out Island island)){
-                Vector3 newPosition = new Vector3(hit.point.x, island.transform.position.y + 4f, hit.point.z);
+                Vector3 newPosition = new Vector3(hit.point.x, island.transform.position.y + 5f, hit.point.z);
                 gameObject.transform.position = newPosition;
             }
         }
@@ -64,8 +69,12 @@ public class Weapon : MonoBehaviour{
                 }
 
                 if (this.GetDataWeapon().Equals(weapon.GetDataWeapon())){
-                    this.FreeTheCell();
-                    _factory.MergeWeapons(this, weapon, weapon._cell);
+                    ref Cell tempCell = ref _cell;
+                    // this.FreeTheCell();
+                    if (_factory.TryMergeWeapons(this, weapon, weapon._cell) == false){
+                        // OccupyTheCell(_cell);
+                        ReturnPositionToCell();
+                    }
                 }
                 else{
                     ReturnPositionToCell();
