@@ -13,34 +13,34 @@ MonoBehaviour:
   m_Name: EnemyDescriptions
   m_EditorClassIdentifier: 
   listOfHumans:
-  - {fileID: 11400000, guid: d48652acdb068d941b78ea169025fa8c, type: 2}
   - {fileID: 11400000, guid: ecbac47bda3900e498d8cb3e1ce689fd, type: 2}
-  - {fileID: 11400000, guid: a2391e110cf9197479774eb2f7d083ef, type: 2}
-  - {fileID: 11400000, guid: 5bb7c1b039d6d3f468c9df65856dd7e2, type: 2}
+  - {fileID: 11400000, guid: d48652acdb068d941b78ea169025fa8c, type: 2}
   - {fileID: 11400000, guid: 7ac2e8b4fc312994885c92ab441d2800, type: 2}
   - {fileID: 11400000, guid: 01b4500fefa67f24caf12ffd195de000, type: 2}
+  - {fileID: 11400000, guid: 5bb7c1b039d6d3f468c9df65856dd7e2, type: 2}
+  - {fileID: 11400000, guid: a2391e110cf9197479774eb2f7d083ef, type: 2}
   - {fileID: 11400000, guid: a40be290a1ae6f241bcafc827df39715, type: 2}
   listOfElves:
-  - {fileID: 11400000, guid: d19fc2c91ec6d98438b22aaa08769f3d, type: 2}
-  - {fileID: 11400000, guid: a08144ded65b47b4e9643ec3b2a2ca8e, type: 2}
+  - {fileID: 11400000, guid: ac1fb317e7474334cbedd5becf4a461a, type: 2}
+  - {fileID: 11400000, guid: dd364a9630be91d4da30bf68ba313cc4, type: 2}
   - {fileID: 11400000, guid: 485873838c6741a41a26faa5c97336ca, type: 2}
   - {fileID: 11400000, guid: e414dc73b2ecd9744ad33cec156b352d, type: 2}
-  - {fileID: 11400000, guid: dd364a9630be91d4da30bf68ba313cc4, type: 2}
+  - {fileID: 11400000, guid: d19fc2c91ec6d98438b22aaa08769f3d, type: 2}
+  - {fileID: 11400000, guid: a08144ded65b47b4e9643ec3b2a2ca8e, type: 2}
   - {fileID: 11400000, guid: f45bae14a5e4bff46872317900f7c769, type: 2}
-  - {fileID: 11400000, guid: ac1fb317e7474334cbedd5becf4a461a, type: 2}
   listOfUndead:
+  - {fileID: 11400000, guid: a4b84faf4d2b45644aa1330436ecd33d, type: 2}
   - {fileID: 11400000, guid: 77e484bd215b46b43a2a1101916ceb8d, type: 2}
+  - {fileID: 11400000, guid: 6219eceaf85ef2c44a5885bd72221db7, type: 2}
   - {fileID: 11400000, guid: b0a6562a2844ef444bba422d9b96b605, type: 2}
   - {fileID: 11400000, guid: 1d25e538504dc9d44b91e5fc48d2ee88, type: 2}
   - {fileID: 11400000, guid: 32b11cfac9b24ca42926c5b04b8737d1, type: 2}
-  - {fileID: 11400000, guid: 6219eceaf85ef2c44a5885bd72221db7, type: 2}
   - {fileID: 11400000, guid: 2b12ea6943fe62f4da2afef9e815f478, type: 2}
-  - {fileID: 11400000, guid: a4b84faf4d2b45644aa1330436ecd33d, type: 2}
   listOfOrcs:
-  - {fileID: 11400000, guid: b70c9d8feb1272f4f94ebe2a07218e14, type: 2}
-  - {fileID: 11400000, guid: 13bfeadd142fbd64dbbe4dafd889d279, type: 2}
-  - {fileID: 11400000, guid: f2b5c4d49ed109c40acd67f52bc6130b, type: 2}
   - {fileID: 11400000, guid: e8f9cdd3913f0e849bdd0a34e2caaf0c, type: 2}
   - {fileID: 11400000, guid: 3060854e63fd29b4aaf2abbb59cb48d1, type: 2}
-  - {fileID: 11400000, guid: f06a4d95291fda44d818ae9423ec5267, type: 2}
+  - {fileID: 11400000, guid: 13bfeadd142fbd64dbbe4dafd889d279, type: 2}
   - {fileID: 11400000, guid: 559c2ee7d0f4ade469d0a9558869d784, type: 2}
+  - {fileID: 11400000, guid: f06a4d95291fda44d818ae9423ec5267, type: 2}
+  - {fileID: 11400000, guid: b70c9d8feb1272f4f94ebe2a07218e14, type: 2}
+  - {fileID: 11400000, guid: f2b5c4d49ed109c40acd67f52bc6130b, type: 2}

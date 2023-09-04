@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdbd07d04e241cfb8e3a32f4a03144b, type: 3}
   m_Name: Griffin
   m_EditorClassIdentifier: 
+  enemyData:
+    levelOfUnit: 5
+    levelOfRace: 0
   damage: 0
   health: 0
-  moveSpeed: 0
-  rangeAttack: 0
+  moveSpeed: 0.6203579
+  rangeAttack: 3.0525632
+  gold: 0
   enemyPrefab: {fileID: -5343157802767195066, guid: 24ba327de4017424597b5fe8eac72655,
     type: 3}
