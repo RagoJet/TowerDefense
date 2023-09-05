@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 5874279210015494369}
   - component: {fileID: 5820587431381576031}
   - component: {fileID: -9170936962054668678}
+  - component: {fileID: 8516493945255529884}
   m_Layer: 0
   m_Name: BattleOwl
   m_TagString: Untagged
@@ -569,6 +570,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2d92cd9805407e9f6d5272f6f9d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8516493945255529884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877429211751600475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5877443654136786993

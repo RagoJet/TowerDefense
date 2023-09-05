@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyData:
     levelOfUnit: 2
     levelOfRace: 0
-  damage: 0
-  health: 0
+  damage: 10
+  maxHealth: 10
   moveSpeed: 0.6105653
   rangeAttack: 2.7725325
   gold: 0

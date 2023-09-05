@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 2654522964215786214}
   - component: {fileID: 2707854554910487666}
   - component: {fileID: -3691225039104460800}
+  - component: {fileID: 3938475610928371198}
   m_Layer: 0
   m_Name: ElfRanger
   m_TagString: Untagged
@@ -546,6 +547,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2d92cd9805407e9f6d5272f6f9d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3938475610928371198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2648876987867345262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2648917377777387514

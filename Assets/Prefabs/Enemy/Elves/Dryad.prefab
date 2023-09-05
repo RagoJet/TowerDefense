@@ -1162,6 +1162,7 @@ GameObject:
   - component: {fileID: 5375103701700430224}
   - component: {fileID: 5459119397078805264}
   - component: {fileID: -4657269405315634758}
+  - component: {fileID: 8111937105783049782}
   m_Layer: 0
   m_Name: Dryad
   m_TagString: Untagged
@@ -1176,7 +1177,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5373756726046018230}
-  m_LocalRotation: {x: -0, y: -0.99944496, z: -0, w: 0.033313766}
+  m_LocalRotation: {x: 0, y: -0.9994451, z: 0, w: 0.03331213}
   m_LocalPosition: {x: 0.08344822, y: 1.71, z: 7.5159426}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
@@ -1216,6 +1217,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2d92cd9805407e9f6d5272f6f9d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8111937105783049782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373756726046018230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5373759035610815774

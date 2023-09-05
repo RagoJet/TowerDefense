@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6118119280859405963}
   - component: {fileID: 6177791584896945501}
   - component: {fileID: 4466582149861763883}
+  - component: {fileID: 2130032598410209955}
   m_Layer: 0
   m_Name: Grunt
   m_TagString: Untagged
@@ -190,6 +191,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2d92cd9805407e9f6d5272f6f9d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2130032598410209955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6119270193552993775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6119293118460794267

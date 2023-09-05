@@ -822,6 +822,7 @@ GameObject:
   - component: {fileID: 2552283727924278049}
   - component: {fileID: 2461943991932178635}
   - component: {fileID: 8561577779905125985}
+  - component: {fileID: 3519943219940488864}
   m_Layer: 0
   m_Name: Crossbowman
   m_TagString: Untagged
@@ -876,6 +877,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2d92cd9805407e9f6d5272f6f9d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3519943219940488864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558028271897497725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2558037175641385953

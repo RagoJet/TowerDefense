@@ -15,15 +15,21 @@ public class Factory : MonoBehaviour{
     private readonly LazyEnemyPool _lazyEnemyPool = new LazyEnemyPool();
     private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
 
+
     private void Awake(){
         _lazyEnemyPool.Init();
         _lazyWeaponPool.Init();
-        CreateAndDirectEnemy(new EnemyData(0, 6));
+    }
+
+    public void Wow(){
         CreateAndDirectEnemy(new EnemyData(0, 1));
-        CreateAndDirectEnemy(new EnemyData(1, 2));
-        CreateAndDirectEnemy(new EnemyData(2, 3));
+        CreateAndDirectEnemy(new EnemyData(0, 2));
+        CreateAndDirectEnemy(new EnemyData(0, 3));
+        CreateAndDirectEnemy(new EnemyData(0, 4));
+        CreateAndDirectEnemy(new EnemyData(0, 5));
         CreateAndDirectEnemy(new EnemyData(0, 6));
     }
+
 
     private void CreateAndDirectEnemy(EnemyData enemyData){
         Enemy enemy = _lazyEnemyPool.GetEnemy(enemyData);
@@ -32,6 +38,7 @@ public class Factory : MonoBehaviour{
             enemy = CreateEnemy(enemyData);
         }
 
+        enemy.OnDie += HideEnemy;
         enemy.Construct(theKing, theGate.transform);
     }
 
@@ -63,6 +70,7 @@ public class Factory : MonoBehaviour{
     }
 
     private void HideEnemy(Enemy enemy){
+        enemy.OnDie -= HideEnemy;
         _lazyEnemyPool.HideEnemy(enemy);
     }
 

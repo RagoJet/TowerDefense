@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 5192262571809096507}
   - component: {fileID: 5281856017178529789}
   - component: {fileID: -1336912989419396575}
+  - component: {fileID: 5963216918799244329}
   m_Layer: 0
   m_Name: DeathKnight
   m_TagString: Untagged
@@ -304,6 +305,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2d92cd9805407e9f6d5272f6f9d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5963216918799244329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5195520017688632347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5195542958782664981

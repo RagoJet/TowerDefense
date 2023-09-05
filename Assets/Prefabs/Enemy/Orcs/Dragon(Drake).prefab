@@ -1067,6 +1067,7 @@ GameObject:
   - component: {fileID: 7174039171434594009}
   - component: {fileID: 7118620678282416351}
   - component: {fileID: -3360872284147718806}
+  - component: {fileID: 8909086582521480508}
   m_Layer: 0
   m_Name: Dragon(Drake)
   m_TagString: Untagged
@@ -1121,6 +1122,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec2d92cd9805407e9f6d5272f6f9d192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8909086582521480508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7177465488080142865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7177484186746360631
