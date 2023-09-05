@@ -1,24 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class Factory : MonoBehaviour{
+
+public class EnemiesFactory : MonoBehaviour{
     [SerializeField] private EnemyDescriptions enemyDescriptions;
-    [SerializeField] private WeaponDescriptions weaponDescriptions;
 
     [SerializeField] private King theKing;
     [SerializeField] private GameObject theGate;
 
-    [SerializeField] private Cells cells;
 
-
-    [SerializeField] private int maxLevelWeapons = 24;
-
+    private readonly List<Enemy> _listOfEnemies = new List<Enemy>();
     private readonly LazyEnemyPool _lazyEnemyPool = new LazyEnemyPool();
-    private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
+
+    public List<Enemy> ListOfEnemies => _listOfEnemies;
 
 
     private void Awake(){
         _lazyEnemyPool.Init();
-        _lazyWeaponPool.Init();
     }
 
     public void Wow(){
@@ -39,6 +37,7 @@ public class Factory : MonoBehaviour{
         }
 
         enemy.OnDie += HideEnemy;
+        _listOfEnemies.Add(enemy);
         enemy.Construct(theKing, theGate.transform);
     }
 
@@ -70,54 +69,8 @@ public class Factory : MonoBehaviour{
     }
 
     private void HideEnemy(Enemy enemy){
+        _listOfEnemies.Remove(enemy);
         enemy.OnDie -= HideEnemy;
         _lazyEnemyPool.HideEnemy(enemy);
-    }
-
-    private void HideWeapon(Weapon weapon){
-        _lazyWeaponPool.HideWeapon(weapon);
-    }
-
-    public void TryBuyWeapon(){
-        if (cells.TryGetCell(out var cell)){
-            CreateFirstLevelWeapon(cell);
-        }
-    }
-
-    private Weapon CreateFirstLevelWeapon(Cell cell){
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(1);
-        if (weapon == null){
-            weapon = CreateWeapon(1, cell);
-        }
-
-        weapon.Construct(cell);
-        return weapon;
-    }
-
-    private Weapon CreateWeapon(int levelWeapon, Cell cell){
-        int index = levelWeapon - 1;
-        Weapon weapon;
-        weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
-        weapon.Construct(weaponDescriptions.ListWeapons[index], this, cell);
-        return weapon;
-    }
-
-    public bool TryMergeWeapons(Weapon weapon1, Weapon weapon2, Cell cell){
-        int newLevel = weapon1.GetLevelWeapon() + 1;
-        if (newLevel > maxLevelWeapons){
-            return false;
-        }
-
-        HideWeapon(weapon1);
-        HideWeapon(weapon2);
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(newLevel);
-        if (weapon == null){
-            weapon = CreateWeapon(newLevel, cell);
-        }
-        else{
-            weapon.Construct(cell);
-        }
-
-        return true;
     }
 }

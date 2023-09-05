@@ -2980,7 +2980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  damage: 15
+  damage: 5
   rangeAttack: 1
 --- !u!114 &2432687548927067658
 MonoBehaviour:
