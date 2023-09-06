@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class KingHealthUI : MonoBehaviour{
     [SerializeField] King king;
     [SerializeField] private Image currentHealthBar;
+
 
     private void Start(){
         king.UIHealthEvent += UpdateUIHealth;
@@ -11,6 +13,6 @@ public class KingHealthUI : MonoBehaviour{
     }
 
     private void UpdateUIHealth(){
-        currentHealthBar.fillAmount = king.GetPercentageOfHealth();
+        currentHealthBar.DOFillAmount(king.GetPercentageOfHealth(), 0.5f).SetEase(Ease.OutExpo);
     }
 }

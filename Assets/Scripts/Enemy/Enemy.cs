@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-enum StateEnemy{
+public enum StateEnemy{
     Running,
     Attacking,
     Death
@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour{
     private King _target;
 
     private int _currentHealth;
+
 
     public event Action<Enemy> OnDie;
 
@@ -92,5 +93,9 @@ public class Enemy : MonoBehaviour{
     IEnumerator LifeTimeOfEnemy(){
         yield return new WaitForSeconds(2f);
         OnDie?.Invoke(this);
+    }
+
+    public StateEnemy GetState(){
+        return _state;
     }
 }

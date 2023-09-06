@@ -15,8 +15,7 @@ MonoBehaviour:
   level: 7
   damage: 0
   attackDelay: 0
-  cooldown: 0
-  rangeAttack: 0
-  bulletPrefab: {fileID: 0}
+  rangeAttack: 1000
+  price: 0
   weaponPrefab: {fileID: 3937662718155648608, guid: 26c195b1a727af349a06b04a48589b92,
     type: 3}

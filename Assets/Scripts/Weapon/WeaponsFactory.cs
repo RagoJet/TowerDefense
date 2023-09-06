@@ -36,7 +36,7 @@ public class WeaponsFactory : MonoBehaviour{
         Weapon weapon;
         weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
         weapon.Construct(weaponDescriptions.ListWeapons[index], this, cell,
-            GetComponent<EnemiesFactory>().ListOfEnemies);
+            GetComponent<EnemiesFactory>().ListOfTargetToShoot);
         return weapon;
     }
 

@@ -313,3 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2774dddd1ef40d6a1f99eb37849b2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeParts:
+  - {fileID: 7387751135485933907}
+  - {fileID: 8412720002394717282}

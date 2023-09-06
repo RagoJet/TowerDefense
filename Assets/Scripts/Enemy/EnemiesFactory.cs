@@ -9,23 +9,13 @@ public class EnemiesFactory : MonoBehaviour{
     [SerializeField] private GameObject theGate;
 
 
-    private readonly List<Enemy> _listOfEnemies = new List<Enemy>();
     private readonly LazyEnemyPool _lazyEnemyPool = new LazyEnemyPool();
 
-    public List<Enemy> ListOfEnemies => _listOfEnemies;
-
+    private readonly List<Enemy> _listOfTargetToShoot = new List<Enemy>();
+    public List<Enemy> ListOfTargetToShoot => _listOfTargetToShoot;
 
     private void Awake(){
         _lazyEnemyPool.Init();
-    }
-
-    public void Wow(){
-        CreateAndDirectEnemy(new EnemyData(0, 1));
-        CreateAndDirectEnemy(new EnemyData(0, 2));
-        CreateAndDirectEnemy(new EnemyData(0, 3));
-        CreateAndDirectEnemy(new EnemyData(0, 4));
-        CreateAndDirectEnemy(new EnemyData(0, 5));
-        CreateAndDirectEnemy(new EnemyData(0, 6));
     }
 
 
@@ -37,7 +27,7 @@ public class EnemiesFactory : MonoBehaviour{
         }
 
         enemy.OnDie += HideEnemy;
-        _listOfEnemies.Add(enemy);
+        _listOfTargetToShoot.Add(enemy);
         enemy.Construct(theKing, theGate.transform);
     }
 
@@ -69,7 +59,7 @@ public class EnemiesFactory : MonoBehaviour{
     }
 
     private void HideEnemy(Enemy enemy){
-        _listOfEnemies.Remove(enemy);
+        _listOfTargetToShoot.Remove(enemy);
         enemy.OnDie -= HideEnemy;
         _lazyEnemyPool.HideEnemy(enemy);
     }

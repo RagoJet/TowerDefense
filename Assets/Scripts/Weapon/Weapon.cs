@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -11,13 +12,16 @@ public enum WeaponMode{
 [RequireComponent(typeof(Collider))]
 public class Weapon : MonoBehaviour{
     private WeaponDescription _description;
-
     private WeaponMode _weaponMode;
     private Cell _cell;
     private WeaponsFactory _factory;
 
     private List<Enemy> _listOfEnemies;
     private Enemy _aimTarget;
+
+    private float _timeFromLastAttack;
+
+    [SerializeField] private Transform[] shakeParts;
 
     public void Construct(WeaponDescription description, WeaponsFactory factory, Cell cell, List<Enemy> list){
         _weaponMode = WeaponMode.On;
@@ -36,40 +40,44 @@ public class Weapon : MonoBehaviour{
             case WeaponMode.Off:
                 break;
             case WeaponMode.On:
-                FindATarget();
+                if (TryChooseATarget()){
+                    Attack();
+                }
+
                 break;
         }
-        
     }
 
-    private void FindATarget(){
-        if (_aimTarget != null){
-            transform.LookAt(_aimTarget.transform, Vector3.up);
-        }
-        else{
-            ChooseATarget();
-        }
-    }
 
-    private void ChooseATarget(){
-        Enemy closestEnemy = null;
-        float shortestLenght = Single.MaxValue;
-        foreach (var enemy in _listOfEnemies){
-            float lenght = (transform.position - enemy.transform.position).magnitude;
-            if (lenght < shortestLenght){
-                shortestLenght = lenght;
-                closestEnemy = enemy;
+    private bool TryChooseATarget(){
+        if (_aimTarget == null || _aimTarget.GetState() == StateEnemy.Death){
+            _aimTarget = null;
+            float shortestLenght = Single.MaxValue;
+            foreach (var enemy in _listOfEnemies){
+                if (enemy.GetState() != StateEnemy.Death){
+                    float lenght = (transform.position - enemy.transform.position).sqrMagnitude;
+                    if (lenght < shortestLenght){
+                        shortestLenght = lenght;
+                        _aimTarget = enemy;
+                    }
+                }
             }
         }
 
-        _aimTarget = closestEnemy;
+        return _aimTarget != null;
     }
 
     private void Attack(){
-        if (_aimTarget != null){
-            _aimTarget.TakeDamage(_description.damage);
+        if (_aimTarget != null && _aimTarget.GetState() != StateEnemy.Death){
+            transform.LookAt(_aimTarget.transform, Vector3.up);
+            if (Time.time - _timeFromLastAttack >= _description.attackDelay){
+                _aimTarget.TakeDamage(_description.damage);
+                transform.DOShakeScale(_description.attackDelay * 0.7f, 0.1f);
+                _timeFromLastAttack = Time.time;
+            }
         }
     }
+
 
     private void OnDisable(){
         FreeTheCell();

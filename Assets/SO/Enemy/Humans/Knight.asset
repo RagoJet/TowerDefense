@@ -15,10 +15,10 @@ MonoBehaviour:
   enemyData:
     levelOfUnit: 2
     levelOfRace: 0
-  damage: 10
+  damage: 1
   maxHealth: 10
-  moveSpeed: 0.6105653
-  rangeAttack: 2.7725325
+  moveSpeed: 1.2
+  rangeAttack: 1.9
   gold: 0
   enemyPrefab: {fileID: -5121539250197089690, guid: 30e930969ac981a4d9eef37830aeff88,
     type: 3}

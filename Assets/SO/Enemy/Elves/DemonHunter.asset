@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData:
     levelOfUnit: 5
-    levelOfRace: 3
-  damage: 0
-  health: 0
-  moveSpeed: 0.64982575
-  rangeAttack: 2.4408429
+    levelOfRace: 1
+  damage: 1
+  maxHealth: 5
+  moveSpeed: 1.2
+  rangeAttack: 1.8
   gold: 0
   enemyPrefab: {fileID: -4303174308480970710, guid: dd15e287b758a1c428887fbfeb5e2734,
     type: 3}
