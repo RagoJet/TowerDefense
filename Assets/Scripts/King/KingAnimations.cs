@@ -8,7 +8,7 @@ public class KingAnimations : MonoBehaviour{
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Death = Animator.StringToHash("Death");
 
-    private void Awake(){
+    private void Start(){
         _animator = GetComponent<Animator>();
     }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimations : MonoBehaviour{
@@ -7,7 +6,7 @@ public class EnemyAnimations : MonoBehaviour{
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Die = Animator.StringToHash("Die");
 
-    private void Awake(){
+    private void Start(){
         _animator = GetComponent<Animator>();
     }
 

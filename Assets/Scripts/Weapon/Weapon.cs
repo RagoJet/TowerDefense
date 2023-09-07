@@ -11,17 +11,18 @@ public enum WeaponMode{
 
 [RequireComponent(typeof(Collider))]
 public class Weapon : MonoBehaviour{
+    private WeaponsFactory _factory;
+    private Cell _cell;
+
     private WeaponDescription _description;
     private WeaponMode _weaponMode;
-    private Cell _cell;
-    private WeaponsFactory _factory;
+
 
     private List<Enemy> _listOfEnemies;
     private Enemy _aimTarget;
 
     private float _timeFromLastAttack;
 
-    [SerializeField] private Transform[] shakeParts;
 
     public void Construct(WeaponDescription description, WeaponsFactory factory, Cell cell, List<Enemy> list){
         _weaponMode = WeaponMode.On;
@@ -32,6 +33,7 @@ public class Weapon : MonoBehaviour{
     }
 
     public void Construct(Cell cell){
+        _weaponMode = WeaponMode.On;
         OccupyTheCell(cell);
     }
 
@@ -79,10 +81,6 @@ public class Weapon : MonoBehaviour{
     }
 
 
-    private void OnDisable(){
-        FreeTheCell();
-    }
-
     private void ReturnPositionToCell(){
         transform.position = _cell.GetPosition();
     }
@@ -94,8 +92,10 @@ public class Weapon : MonoBehaviour{
     }
 
     private void FreeTheCell(){
-        _cell.MakeAvailable();
-        _cell = null;
+        if (_cell != null){
+            _cell.MakeAvailable();
+            _cell = null;
+        }
     }
 
     public int GetLevelWeapon(){
@@ -135,7 +135,9 @@ public class Weapon : MonoBehaviour{
                 }
 
                 if (this.GetLevelWeapon() == weapon.GetLevelWeapon()){
-                    if (_factory.TryMergeWeapons(this, weapon, weapon._cell) == false){
+                    if (_factory.TryMergeWeapons(this, weapon, weapon._cell) == true){
+                    }
+                    else{
                         ReturnPositionToCell();
                     }
                 }
@@ -156,5 +158,9 @@ public class Weapon : MonoBehaviour{
         }
 
         ReturnPositionToCell();
+    }
+
+    private void OnDisable(){
+        FreeTheCell();
     }
 }

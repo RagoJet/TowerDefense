@@ -7,7 +7,7 @@ public class WeaponsFactory : MonoBehaviour{
 
     private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
 
-    private void Awake(){
+    private void Start(){
         _lazyWeaponPool.Init();
     }
 
@@ -15,10 +15,12 @@ public class WeaponsFactory : MonoBehaviour{
         _lazyWeaponPool.HideWeapon(weapon);
     }
 
-    public void TryBuyWeapon(){
+    public bool TryCreateWeapon(){
         if (cells.TryGetCell(out var cell)){
             CreateFirstLevelWeapon(cell);
+            return true;
         }
+        else return false;
     }
 
     private Weapon CreateFirstLevelWeapon(Cell cell){
@@ -36,7 +38,7 @@ public class WeaponsFactory : MonoBehaviour{
         Weapon weapon;
         weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
         weapon.Construct(weaponDescriptions.ListWeapons[index], this, cell,
-            GetComponent<EnemiesFactory>().ListOfTargetToShoot);
+            GetComponent<EnemiesFactory>().ListOfAliveEnemies);
         return weapon;
     }
 

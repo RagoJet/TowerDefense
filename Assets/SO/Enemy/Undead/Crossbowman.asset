@@ -19,6 +19,6 @@ MonoBehaviour:
   maxHealth: 10
   moveSpeed: 1.2
   rangeAttack: 6
-  gold: 0
+  gold: 50
   enemyPrefab: {fileID: 8561577779905125985, guid: ad7da9d7164f93c42af8e5e2b6e1c2be,
     type: 3}

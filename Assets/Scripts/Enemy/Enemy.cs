@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour{
 
     public event Action<Enemy> OnDie;
 
-    private void Awake(){
+    private void Start(){
         _animations = GetComponent<EnemyAnimations>();
     }
 
@@ -46,20 +46,23 @@ public class Enemy : MonoBehaviour{
     }
 
     private void Update(){
-        if (_state == StateEnemy.Running){
-            Vector3 direction = new Vector3(_target.transform.position.x, 0f, _target.transform.position.z);
-            transform.Translate(direction * _description.moveSpeed * Time.deltaTime, Space.World);
-            if ((_target.transform.position - transform.position).magnitude < _description.rangeAttack){
-                _state = StateEnemy.Attacking;
-                _animations.PlayAttackAnimation();
-                transform.LookAt(_target.transform, Vector3.up);
-            }
-        }
+        switch (_state){
+            case StateEnemy.Running:
+                Vector3 direction = new Vector3(_target.transform.position.x, 0f, _target.transform.position.z);
+                transform.Translate(direction * _description.moveSpeed * Time.deltaTime, Space.World);
+                if ((_target.transform.position - transform.position).magnitude < _description.rangeAttack){
+                    _state = StateEnemy.Attacking;
+                    _animations.PlayAttackAnimation();
+                    transform.LookAt(_target.transform, Vector3.up);
+                }
 
-        if (_state == StateEnemy.Attacking){
-            if (_target.GetState() == KingState.Idle){
-                _target.SetTarget(this);
-            }
+                break;
+            case StateEnemy.Attacking:
+                if (_target.GetState() == KingState.Idle){
+                    _target.SetTarget(this);
+                }
+
+                break;
         }
     }
 
@@ -72,7 +75,7 @@ public class Enemy : MonoBehaviour{
 
     public void TakeDamage(int countOfDamage){
         _currentHealth -= countOfDamage;
-        if (_currentHealth <= 0){
+        if (_currentHealth <= 0 && _state != StateEnemy.Death){
             Die();
         }
     }
@@ -97,5 +100,9 @@ public class Enemy : MonoBehaviour{
 
     public StateEnemy GetState(){
         return _state;
+    }
+
+    public int GetGold(){
+        return _description.gold;
     }
 }

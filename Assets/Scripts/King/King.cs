@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 public enum KingState{
     Idle,
     Attacking,
@@ -20,9 +19,11 @@ public class King : MonoBehaviour{
     [SerializeField] private int damage;
     [SerializeField] private float rangeAttack;
 
+
     public event Action UIHealthEvent;
 
     private void Awake(){
+        _state = KingState.Idle;
         _currentHealth = maxHealth;
         _animations = GetComponent<KingAnimations>();
     }
@@ -38,7 +39,8 @@ public class King : MonoBehaviour{
                 _animations.PlayIdleAnimation();
                 break;
             case KingState.Attacking:
-                if (_enemyTarget == null){
+                if (_enemyTarget == null || _enemyTarget.GetState() == StateEnemy.Death){
+                    _enemyTarget = null;
                     _state = KingState.Idle;
                     return;
                 }
@@ -63,14 +65,11 @@ public class King : MonoBehaviour{
 
     // call in attack animation
     public void DealDamage(){
-        if (_enemyTarget != null){
+        if (_enemyTarget != null && _enemyTarget.GetState() != StateEnemy.Death){
             _enemyTarget.TakeDamage(damage);
         }
     }
 
-    public float GetPercentageOfHealth(){
-        return (float) _currentHealth / maxHealth;
-    }
 
     public KingState GetState(){
         return _state;
@@ -82,5 +81,23 @@ public class King : MonoBehaviour{
 
     public Enemy GetTarget(){
         return _enemyTarget;
+    }
+
+    public void AddDamage(int addDamage){
+        damage += addDamage;
+    }
+
+    public void AddHealth(int health){
+        maxHealth += health;
+        _currentHealth += health;
+        UIHealthEvent?.Invoke();
+    }
+
+    public String GetHealthAndMaxHealth(){
+        return _currentHealth + "/" + maxHealth;
+    }
+
+    public float GetPercentageOfHealth(){
+        return (float) _currentHealth / maxHealth;
     }
 }

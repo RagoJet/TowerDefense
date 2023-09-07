@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: WeaponDescription 2
   m_EditorClassIdentifier: 
   level: 2
-  damage: 0
-  attackDelay: 0.05
-  rangeAttack: 1000
-  price: 0
+  damage: 2
+  attackDelay: 1.5
   weaponPrefab: {fileID: 6162025132964466579, guid: 652674e35f3d66d46bd4cf84c820a0c7,
     type: 3}

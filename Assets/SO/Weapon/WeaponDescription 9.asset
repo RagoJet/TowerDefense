@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: WeaponDescription 9
   m_EditorClassIdentifier: 
   level: 9
-  damage: 0
-  attackDelay: 0
-  rangeAttack: 1000
-  price: 0
+  damage: 70
+  attackDelay: 1
   weaponPrefab: {fileID: 6822533048873178572, guid: 41fce2e91115f37438ce1c2e3aac7317,
     type: 3}

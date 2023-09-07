@@ -3,7 +3,7 @@ using UnityEngine;
 public class Cells : MonoBehaviour{
     private Cell[] _arrayCells;
 
-    private void Awake(){
+    private void Start(){
         _arrayCells = GetComponentsInChildren<Cell>();
     }
 

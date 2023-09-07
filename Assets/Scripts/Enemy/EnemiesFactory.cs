@@ -5,17 +5,27 @@ using UnityEngine;
 public class EnemiesFactory : MonoBehaviour{
     [SerializeField] private EnemyDescriptions enemyDescriptions;
 
+    [SerializeField] private Shop shop;
+
     [SerializeField] private King theKing;
     [SerializeField] private GameObject theGate;
 
 
     private readonly LazyEnemyPool _lazyEnemyPool = new LazyEnemyPool();
 
-    private readonly List<Enemy> _listOfTargetToShoot = new List<Enemy>();
-    public List<Enemy> ListOfTargetToShoot => _listOfTargetToShoot;
+    private readonly List<Enemy> _listOfAliveEnemies = new List<Enemy>();
+    public List<Enemy> ListOfAliveEnemies => _listOfAliveEnemies;
 
-    private void Awake(){
+
+    private void Start(){
         _lazyEnemyPool.Init();
+    }
+
+
+    public void CreateEnemiesButton(){
+        int levelOfUnit = Random.Range(0, 7);
+        int levelOfRace = Random.Range(0, 4);
+        CreateAndDirectEnemy(new EnemyData(levelOfRace, levelOfUnit));
     }
 
 
@@ -27,8 +37,16 @@ public class EnemiesFactory : MonoBehaviour{
         }
 
         enemy.OnDie += HideEnemy;
-        _listOfTargetToShoot.Add(enemy);
+        _listOfAliveEnemies.Add(enemy);
         enemy.Construct(theKing, theGate.transform);
+    }
+
+
+    private void HideEnemy(Enemy enemy){
+        _listOfAliveEnemies.Remove(enemy);
+        shop.AddGoldFromEnemy(enemy.GetGold());
+        enemy.OnDie -= HideEnemy;
+        _lazyEnemyPool.HideEnemy(enemy);
     }
 
     private Enemy CreateEnemy(EnemyData enemyData){
@@ -56,11 +74,5 @@ public class EnemiesFactory : MonoBehaviour{
         }
 
         return null;
-    }
-
-    private void HideEnemy(Enemy enemy){
-        _listOfTargetToShoot.Remove(enemy);
-        enemy.OnDie -= HideEnemy;
-        _lazyEnemyPool.HideEnemy(enemy);
     }
 }
