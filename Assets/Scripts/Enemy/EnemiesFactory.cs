@@ -17,19 +17,12 @@ public class EnemiesFactory : MonoBehaviour{
     public List<Enemy> ListOfAliveEnemies => _listOfAliveEnemies;
 
 
-    private void Start(){
+    private void Awake(){
         _lazyEnemyPool.Init();
     }
 
 
-    public void CreateEnemiesButton(){
-        int levelOfUnit = Random.Range(0, 7);
-        int levelOfRace = Random.Range(0, 4);
-        CreateAndDirectEnemy(new EnemyData(levelOfRace, levelOfUnit));
-    }
-
-
-    private void CreateAndDirectEnemy(EnemyData enemyData){
+    public void CreateAndDirectEnemy(EnemyData enemyData){
         Enemy enemy = _lazyEnemyPool.GetEnemy(enemyData);
 
         if (enemy == null){
@@ -38,7 +31,7 @@ public class EnemiesFactory : MonoBehaviour{
 
         enemy.OnDie += HideEnemy;
         _listOfAliveEnemies.Add(enemy);
-        enemy.Construct(theKing, theGate.transform);
+        enemy.Construct(theGate.transform);
     }
 
 

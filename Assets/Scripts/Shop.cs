@@ -38,7 +38,7 @@ public class Shop : MonoBehaviour{
         if (gold < priceWeapon) return;
         if (weaponsFactory.TryCreateWeapon()){
             gold -= priceWeapon;
-            priceWeapon += 10;
+            priceWeapon += 1;
             UpdateGoldUI();
             UpdatePriceWeaponUI();
         }

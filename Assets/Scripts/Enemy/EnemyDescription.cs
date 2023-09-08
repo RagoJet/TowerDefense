@@ -18,8 +18,6 @@ public class EnemyDescription : ScriptableObject{
     public EnemyData enemyData;
     public int damage;
     public int maxHealth;
-    public float moveSpeed;
-    public float rangeAttack;
     public int gold;
 
     public Enemy enemyPrefab;

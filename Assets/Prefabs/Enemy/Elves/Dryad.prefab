@@ -1163,6 +1163,7 @@ GameObject:
   - component: {fileID: 5459119397078805264}
   - component: {fileID: -4657269405315634758}
   - component: {fileID: 8111937105783049782}
+  - component: {fileID: -816647026832740567}
   m_Layer: 0
   m_Name: Dryad
   m_TagString: Untagged
@@ -1178,7 +1179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5373756726046018230}
   m_LocalRotation: {x: 0, y: -0.9994451, z: 0, w: 0.03331213}
-  m_LocalPosition: {x: 0.08344822, y: 1.71, z: 7.5159426}
+  m_LocalPosition: {x: 0.08344822, y: 1.65, z: 7.5159426}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1231,6 +1232,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &-816647026832740567
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373756726046018230}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 3
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &5373759035610815774
 GameObject:
   m_ObjectHideFlags: 0

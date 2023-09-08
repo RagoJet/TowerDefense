@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public enum StateEnemy{
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour{
     private EnemyDescription _description;
     private EnemyAnimations _animations;
     private StateEnemy _state;
+    private NavMeshAgent _agent;
     private King _target;
 
     private int _currentHealth;
@@ -21,7 +23,8 @@ public class Enemy : MonoBehaviour{
 
     public event Action<Enemy> OnDie;
 
-    private void Start(){
+    private void Awake(){
+        _agent = GetComponent<NavMeshAgent>();
         _animations = GetComponent<EnemyAnimations>();
     }
 
@@ -35,25 +38,22 @@ public class Enemy : MonoBehaviour{
         _target = target;
         _state = StateEnemy.Running;
         _currentHealth = _description.maxHealth;
+        _agent.SetDestination(_target.transform.position);
     }
 
-    public void Construct(King target, Transform theGateTransform){
+    public void Construct(Transform theGateTransform){
         transform.position = theGateTransform.position + new Vector3(Random.Range(-2, 2), 0f, Random.Range(-1, -2));
-        _target = target;
         _state = StateEnemy.Running;
         _currentHealth = _description.maxHealth;
-        transform.forward = theGateTransform.forward;
+        _agent.SetDestination(_target.transform.position);
     }
 
     private void Update(){
         switch (_state){
             case StateEnemy.Running:
-                Vector3 direction = new Vector3(_target.transform.position.x, 0f, _target.transform.position.z);
-                transform.Translate(direction * _description.moveSpeed * Time.deltaTime, Space.World);
-                if ((_target.transform.position - transform.position).magnitude < _description.rangeAttack){
+                if (_agent.remainingDistance <= _agent.stoppingDistance){
                     _state = StateEnemy.Attacking;
                     _animations.PlayAttackAnimation();
-                    transform.LookAt(_target.transform, Vector3.up);
                 }
 
                 break;
@@ -74,9 +74,11 @@ public class Enemy : MonoBehaviour{
     }
 
     public void TakeDamage(int countOfDamage){
-        _currentHealth -= countOfDamage;
-        if (_currentHealth <= 0 && _state != StateEnemy.Death){
-            Die();
+        if (_currentHealth > 0){
+            _currentHealth -= countOfDamage;
+            if (_currentHealth <= 0 && _state != StateEnemy.Death){
+                Die();
+            }
         }
     }
 

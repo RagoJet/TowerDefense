@@ -6,7 +6,7 @@ public class EnemyAnimations : MonoBehaviour{
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Die = Animator.StringToHash("Die");
 
-    private void Start(){
+    private void Awake(){
         _animator = GetComponent<Animator>();
     }
 

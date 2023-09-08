@@ -807,6 +807,7 @@ GameObject:
   - component: {fileID: 5258568151289192476}
   - component: {fileID: -5343157802767195066}
   - component: {fileID: 842738960895326068}
+  - component: {fileID: 1509370463273196744}
   m_Layer: 0
   m_Name: Griffin
   m_TagString: Untagged
@@ -822,7 +823,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5309048854129576092}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 1.7399998, y: 1.5, z: 5.7}
+  m_LocalPosition: {x: 1.7399998, y: 1.65, z: 5.7}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -875,6 +876,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3953fe3b54b74be9b6c8e61cc0f602a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &1509370463273196744
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309048854129576092}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2.8
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &5309087770695039642
 GameObject:
   m_ObjectHideFlags: 0

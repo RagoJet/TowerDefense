@@ -16,7 +16,7 @@ MonoBehaviour:
     levelOfUnit: 3
     levelOfRace: 0
   damage: 1
-  maxHealth: 10
+  maxHealth: 7
   moveSpeed: 1.2
   rangeAttack: 6
   gold: 50
