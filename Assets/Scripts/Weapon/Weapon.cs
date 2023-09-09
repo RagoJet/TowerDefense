@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-
 public enum WeaponMode{
     Off,
     On
@@ -50,7 +49,6 @@ public class Weapon : MonoBehaviour{
         }
     }
 
-
     private bool TryChooseATarget(){
         if (_aimTarget == null || _aimTarget.GetState() == StateEnemy.Death){
             _aimTarget = null;
@@ -80,28 +78,6 @@ public class Weapon : MonoBehaviour{
         }
     }
 
-
-    private void ReturnPositionToCell(){
-        transform.position = _cell.GetPosition();
-    }
-
-    private void OccupyTheCell(Cell cell){
-        _cell = cell;
-        transform.position = _cell.GetPosition();
-        cell.MakeOccupied();
-    }
-
-    private void FreeTheCell(){
-        if (_cell != null){
-            _cell.MakeAvailable();
-            _cell = null;
-        }
-    }
-
-    public int GetLevelWeapon(){
-        return _description.level;
-    }
-
     private void OnMouseDown(){
         _weaponMode = WeaponMode.Off;
     }
@@ -125,39 +101,50 @@ public class Weapon : MonoBehaviour{
         Ray ray = new Ray();
         ray.origin = transform.position;
         ray.direction = Vector3.down;
+        RaycastHit hit;
 
-        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
-
-        foreach (RaycastHit hit in hits){
-            if (hit.collider.TryGetComponent(out Weapon weapon)){
-                if (weapon == this){
-                    continue;
+        int cellLayerMask = 1 << LayerMask.NameToLayer("CellWeapon");
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cellLayerMask)){
+            if (hit.collider.TryGetComponent(out Cell targetCell)){
+                if (targetCell == _cell){
+                    ReturnPositionToCell();
                 }
-
-                if (this.GetLevelWeapon() == weapon.GetLevelWeapon()){
-                    if (_factory.TryMergeWeapons(this, weapon, weapon._cell) == true){
-                    }
-                    else{
+                else if (targetCell.IsAvailable()){
+                    FreeTheCell();
+                    OccupyTheCell(targetCell);
+                }
+                else if (GetLevelWeapon() == targetCell.GetWeaponOfThisCell().GetLevelWeapon()){
+                    if (_factory.TryMergeWeapons(this, targetCell.GetWeaponOfThisCell(), targetCell) == false){
                         ReturnPositionToCell();
                     }
                 }
                 else{
                     ReturnPositionToCell();
                 }
-
-                return;
             }
         }
-
-        foreach (RaycastHit hit in hits){
-            if (hit.collider.TryGetComponent(out Cell cell)){
-                FreeTheCell();
-                OccupyTheCell(cell);
-                return;
-            }
+        else{
+            ReturnPositionToCell();
         }
+    }
 
+    private void ReturnPositionToCell(){
+        transform.position = _cell.GetPosition();
+    }
+
+    private void OccupyTheCell(Cell cell){
+        _cell = cell;
+        _cell.MakeOccupied(this);
         ReturnPositionToCell();
+    }
+
+    private void FreeTheCell(){
+        _cell.MakeAvailable();
+        _cell = null;
+    }
+
+    public int GetLevelWeapon(){
+        return _description.level;
     }
 
     private void OnDisable(){

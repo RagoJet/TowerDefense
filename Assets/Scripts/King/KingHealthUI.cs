@@ -10,7 +10,8 @@ public class KingHealthUI : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI healthBarText;
 
 
-    private void Start(){
+    public void Construct(King king){
+        this.king = king;
         king.UIHealthEvent += UpdateUIHealth;
         UpdateUIHealth();
     }

@@ -22,11 +22,12 @@ public class King : MonoBehaviour{
 
     public event Action UIHealthEvent;
 
-    private void Awake(){
+    public void Init(){
         _state = KingState.Idle;
         _currentHealth = maxHealth;
         _animations = GetComponent<KingAnimations>();
     }
+
 
     private void Update(){
         switch (_state){

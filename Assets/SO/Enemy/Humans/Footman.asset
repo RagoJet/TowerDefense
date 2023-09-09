@@ -16,9 +16,7 @@ MonoBehaviour:
     levelOfUnit: 0
     levelOfRace: 0
   damage: 1
-  maxHealth: 5
-  moveSpeed: 1.2
-  rangeAttack: 1.7
-  gold: 20
+  maxHealth: 10
+  gold: 15
   enemyPrefab: {fileID: -6627810699475886391, guid: 2ba054e4fce77464c8abc9ade7bc4a1b,
     type: 3}

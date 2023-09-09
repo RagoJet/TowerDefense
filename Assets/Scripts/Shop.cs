@@ -2,8 +2,8 @@
 using UnityEngine;
 
 public class Shop : MonoBehaviour{
-    [SerializeField] WeaponsFactory weaponsFactory;
-    [SerializeField] private King king;
+    WeaponsFactory weaponsFactory;
+    private King king;
 
     [SerializeField] private int gold = 100;
     [SerializeField] private int priceWeapon = 100;
@@ -18,7 +18,9 @@ public class Shop : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI priceDamageText;
 
 
-    private void Start(){
+    public void Construct(WeaponsFactory weaponsFactory, King king){
+        this.weaponsFactory = weaponsFactory;
+        this.king = king;
         UpdateGoldUI();
         UpdatePriceHealthUI();
         UpdatePriceWeaponUI();

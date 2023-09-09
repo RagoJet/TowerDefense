@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour{
 
     public void Construct(King target, Transform theGateTransform, EnemyDescription description){
         _description = description;
-        transform.position = theGateTransform.position + new Vector3(Random.Range(-2, 2), 0f, Random.Range(-1, -2));
+        transform.position = theGateTransform.position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-1f, -2f));
         _target = target;
         _state = StateEnemy.Running;
         _currentHealth = _description.maxHealth;
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour{
     }
 
     public void Construct(Transform theGateTransform){
-        transform.position = theGateTransform.position + new Vector3(Random.Range(-2, 2), 0f, Random.Range(-1, -2));
+        transform.position = theGateTransform.position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-1f, -2f));
         _state = StateEnemy.Running;
         _currentHealth = _description.maxHealth;
         _agent.SetDestination(_target.transform.position);
@@ -62,6 +62,9 @@ public class Enemy : MonoBehaviour{
                     _target.SetTarget(this);
                 }
 
+                break;
+            case StateEnemy.Death:
+                _agent.Stop();
                 break;
         }
     }

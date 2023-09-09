@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 
 public class WeaponsFactory : MonoBehaviour{
-    [SerializeField] private WeaponDescriptions weaponDescriptions;
-    [SerializeField] private Cells cells;
+    private WeaponDescriptions weaponDescriptions;
+    private Cells cells;
     [SerializeField] private int maxLevelWeapons = 24;
 
     private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
 
-    private void Start(){
+
+    public void Construct(WeaponDescriptions weaponDescriptions, Cells cells){
+        this.weaponDescriptions = weaponDescriptions;
+        this.cells = cells;
         _lazyWeaponPool.Init();
     }
 

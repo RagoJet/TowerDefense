@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 2085890379559388489}
   - component: {fileID: 2085890379559388485}
   - component: {fileID: 2085890379559388490}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &2085890379559388491
 Transform:
@@ -110,7 +110,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1.5, z: 4}
+  m_Size: {x: 6, y: 1.5, z: 6}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2661598230731313418
 GameObject:

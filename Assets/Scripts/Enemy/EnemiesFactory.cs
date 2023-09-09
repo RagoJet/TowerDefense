@@ -3,21 +3,24 @@ using UnityEngine;
 
 
 public class EnemiesFactory : MonoBehaviour{
-    [SerializeField] private EnemyDescriptions enemyDescriptions;
+    private EnemyDescriptions enemyDescriptions;
+    private Shop shop;
+    private King theKing;
+    private GameObject theGate;
+    private GameManager gameManager;
 
-    [SerializeField] private Shop shop;
-
-    [SerializeField] private King theKing;
-    [SerializeField] private GameObject theGate;
-
-
-    private readonly LazyEnemyPool _lazyEnemyPool = new LazyEnemyPool();
-
-    private readonly List<Enemy> _listOfAliveEnemies = new List<Enemy>();
+    private readonly LazyEnemyPool _lazyEnemyPool = new();
+    private readonly List<Enemy> _listOfAliveEnemies = new();
     public List<Enemy> ListOfAliveEnemies => _listOfAliveEnemies;
 
 
-    private void Awake(){
+    public void Construct(EnemyDescriptions enemyDescriptions, Shop shop, King king, GameObject gate,
+        GameManager gameManager){
+        this.enemyDescriptions = enemyDescriptions;
+        this.shop = shop;
+        this.theKing = king;
+        this.theGate = gate;
+        this.gameManager = gameManager;
         _lazyEnemyPool.Init();
     }
 
@@ -39,6 +42,7 @@ public class EnemiesFactory : MonoBehaviour{
         _listOfAliveEnemies.Remove(enemy);
         shop.AddGoldFromEnemy(enemy.GetGold());
         enemy.OnDie -= HideEnemy;
+        gameManager.OnDieEnemy();
         _lazyEnemyPool.HideEnemy(enemy);
     }
 
