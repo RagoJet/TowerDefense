@@ -1,9 +1,10 @@
 using UnityEngine;
 
 public class Cells : MonoBehaviour{
-    private Cell[] _arrayCells;
+    public Cell[] _arrayCells;
 
-    private void Start(){
+
+    private void Awake(){
         _arrayCells = GetComponentsInChildren<Cell>();
     }
 
@@ -16,5 +17,15 @@ public class Cells : MonoBehaviour{
 
         theCell = null;
         return false;
+    }
+
+    public void SaveDataToContainer(DataContainer dataContainer){
+        dataContainer.cellsInformation.Clear();
+        for (int i = 0; i < _arrayCells.Length; i++){
+            if (!_arrayCells[i].IsAvailable()){
+                dataContainer.cellsInformation.Add(new CellsInformation(i,
+                    _arrayCells[i].GetWeaponOfThisCell().GetLevelWeapon()));
+            }
+        }
     }
 }

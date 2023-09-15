@@ -13,7 +13,6 @@ public class EnemiesFactory : MonoBehaviour{
     private readonly List<Enemy> _listOfAliveEnemies = new();
     public List<Enemy> ListOfAliveEnemies => _listOfAliveEnemies;
 
-
     public void Construct(EnemyDescriptions enemyDescriptions, Shop shop, King king, GameObject gate,
         GameManager gameManager){
         this.enemyDescriptions = enemyDescriptions;
@@ -25,9 +24,27 @@ public class EnemiesFactory : MonoBehaviour{
     }
 
 
+    public void DieAndClearAllEnemies(){
+        foreach (var enemy in _listOfAliveEnemies){
+            enemy.PlayDeathState();
+        }
+
+        _listOfAliveEnemies.Clear();
+    }
+
+    private void HideEnemy(Enemy enemy, bool willBeGold){
+        if (willBeGold){
+            shop.AddGoldFromEnemy(enemy.GetGold());
+        }
+
+        enemy.OnDie -= HideEnemy;
+        _listOfAliveEnemies.Remove(enemy);
+        gameManager.OnDieEnemy();
+        _lazyEnemyPool.HideEnemy(enemy);
+    }
+
     public void CreateAndDirectEnemy(EnemyData enemyData){
         Enemy enemy = _lazyEnemyPool.GetEnemy(enemyData);
-
         if (enemy == null){
             enemy = CreateEnemy(enemyData);
         }
@@ -35,15 +52,6 @@ public class EnemiesFactory : MonoBehaviour{
         enemy.OnDie += HideEnemy;
         _listOfAliveEnemies.Add(enemy);
         enemy.Construct(theGate.transform);
-    }
-
-
-    private void HideEnemy(Enemy enemy){
-        _listOfAliveEnemies.Remove(enemy);
-        shop.AddGoldFromEnemy(enemy.GetGold());
-        enemy.OnDie -= HideEnemy;
-        gameManager.OnDieEnemy();
-        _lazyEnemyPool.HideEnemy(enemy);
     }
 
     private Enemy CreateEnemy(EnemyData enemyData){

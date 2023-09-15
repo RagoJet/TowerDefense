@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 
-public class WeaponsFactory : MonoBehaviour{
+public class WeaponsFactory : MonoBehaviour, ISaveable{
     private WeaponDescriptions weaponDescriptions;
-    private Cells cells;
+    private Cells _cells;
     [SerializeField] private int maxLevelWeapons = 24;
 
     private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
 
 
+    private DataContainer _dataContainer;
+
     public void Construct(WeaponDescriptions weaponDescriptions, Cells cells){
         this.weaponDescriptions = weaponDescriptions;
-        this.cells = cells;
+        _cells = cells;
         _lazyWeaponPool.Init();
     }
 
@@ -19,30 +21,24 @@ public class WeaponsFactory : MonoBehaviour{
     }
 
     public bool TryCreateWeapon(){
-        if (cells.TryGetCell(out var cell)){
-            CreateFirstLevelWeapon(cell);
+        if (_cells.TryGetCell(out var cell)){
+            CreateWeapon(1, cell);
             return true;
         }
         else return false;
     }
 
-    private Weapon CreateFirstLevelWeapon(Cell cell){
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(1);
+    private void CreateWeapon(int levelWeapon, Cell cell){
+        Weapon weapon = _lazyWeaponPool.TryGetWeapon(levelWeapon);
         if (weapon == null){
-            weapon = CreateWeapon(1, cell);
+            int index = levelWeapon - 1;
+            weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
+            weapon.Construct(weaponDescriptions.ListWeapons[index], this, cell,
+                GetComponent<EnemiesFactory>().ListOfAliveEnemies);
         }
-
-        weapon.Construct(cell);
-        return weapon;
-    }
-
-    private Weapon CreateWeapon(int levelWeapon, Cell cell){
-        int index = levelWeapon - 1;
-        Weapon weapon;
-        weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
-        weapon.Construct(weaponDescriptions.ListWeapons[index], this, cell,
-            GetComponent<EnemiesFactory>().ListOfAliveEnemies);
-        return weapon;
+        else{
+            weapon.Construct(cell);
+        }
     }
 
     public bool TryMergeWeapons(Weapon weapon1, Weapon weapon2, Cell cell){
@@ -53,14 +49,27 @@ public class WeaponsFactory : MonoBehaviour{
 
         HideWeapon(weapon1);
         HideWeapon(weapon2);
-        Weapon weapon = _lazyWeaponPool.TryGetWeapon(newLevel);
-        if (weapon == null){
-            weapon = CreateWeapon(newLevel, cell);
-        }
-        else{
-            weapon.Construct(cell);
-        }
+        CreateWeapon(newLevel, cell);
 
         return true;
+    }
+
+    public void WriteDataToContainer(){
+        _cells.SaveDataToContainer(_dataContainer);
+    }
+
+    public void LoadDataFromContainer(){
+        int count = _dataContainer.cellsInformation.Count;
+        if (count > 0){
+            for (int i = 0; i < count; i++){
+                int indexOfCell = _dataContainer.cellsInformation[i].indexOfCell;
+                int levelOfWeapon = _dataContainer.cellsInformation[i].levelWeapon;
+                CreateWeapon(levelOfWeapon, _cells._arrayCells[indexOfCell]);
+            }
+        }
+    }
+
+    public void SetDataContainer(DataContainer dataContainer){
+        _dataContainer = dataContainer;
     }
 }

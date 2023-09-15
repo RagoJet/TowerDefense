@@ -18,6 +18,6 @@ public class KingHealthUI : MonoBehaviour{
 
     private void UpdateUIHealth(){
         currentHealthBar.DOFillAmount(king.GetPercentageOfHealth(), 0.5f).SetEase(Ease.OutExpo);
-        healthBarText.text = king.GetHealthAndMaxHealth();
+        healthBarText.text = king.GetStringHealthAndMaxHealth();
     }
 }

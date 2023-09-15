@@ -20,87 +20,84 @@ public class Enemy : MonoBehaviour{
 
     private int _currentHealth;
 
+    public event Action<Enemy, bool> OnDie;
 
-    public event Action<Enemy> OnDie;
+    private float _timeFromLastCheck;
 
     private void Awake(){
         _agent = GetComponent<NavMeshAgent>();
         _animations = GetComponent<EnemyAnimations>();
     }
 
-    public EnemyData GetLevelData(){
-        return _description.enemyData;
-    }
 
     public void Construct(King target, Transform theGateTransform, EnemyDescription description){
         _description = description;
         transform.position = theGateTransform.position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-1f, -2f));
         _target = target;
-        _state = StateEnemy.Running;
         _currentHealth = _description.maxHealth;
-        _agent.SetDestination(_target.transform.position);
+        PlayRunState();
     }
 
     public void Construct(Transform theGateTransform){
         transform.position = theGateTransform.position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-1f, -2f));
-        _state = StateEnemy.Running;
         _currentHealth = _description.maxHealth;
-        _agent.SetDestination(_target.transform.position);
+        PlayRunState();
     }
 
     private void Update(){
-        switch (_state){
-            case StateEnemy.Running:
-                if (_agent.remainingDistance <= _agent.stoppingDistance){
-                    _state = StateEnemy.Attacking;
-                    _animations.PlayAttackAnimation();
-                }
-
-                break;
-            case StateEnemy.Attacking:
-                if (_target.GetState() == KingState.Idle){
-                    _target.SetTarget(this);
-                }
-
-                break;
-            case StateEnemy.Death:
-                _agent.Stop();
-                break;
-        }
-    }
-
-    // call in attack animation
-    public void DealDamage(){
-        if (_target.GetState() != KingState.Death){
-            _target.TakeDamage(_description.damage);
-        }
-    }
-
-    public void TakeDamage(int countOfDamage){
-        if (_currentHealth > 0){
-            _currentHealth -= countOfDamage;
-            if (_currentHealth <= 0 && _state != StateEnemy.Death){
-                Die();
+        if (_state == StateEnemy.Running){
+            if (Time.time - _timeFromLastCheck < 0.25f) return;
+            if (_agent.remainingDistance <= _agent.stoppingDistance){
+                _timeFromLastCheck = Time.time;
+                PlayAttackState();
             }
         }
     }
 
-    private void Die(){
-        _state = StateEnemy.Death;
-        _animations.PlayDeathAnimation();
-        ResetSelfFromTarget();
-        StartCoroutine(LifeTimeOfEnemy());
+
+    public void PlayRunState(){
+        _state = StateEnemy.Running;
+        _agent.SetDestination(_target.transform.position);
+        // play default (run) animations
     }
 
-    public void ResetSelfFromTarget(){
-        if (_target.GetTarget() == this){
-            _target.SetTarget(null);
+    public void PlayAttackState(){
+        _state = StateEnemy.Attacking;
+        _animations.PlayAttackAnimation();
+    }
+
+
+    // call in attack animation
+    public void DealDamage(){
+        _target.TakeDamage(_description.damage);
+        _target.Aggro(this);
+    }
+
+    public void TakeDamage(int countOfDamage){
+        if (_currentHealth <= 0 || _state == StateEnemy.Death) return;
+        _currentHealth -= countOfDamage;
+        if (_currentHealth <= 0){
+            PlayDeathState();
         }
     }
 
-    IEnumerator LifeTimeOfEnemy(){
-        yield return new WaitForSeconds(2f);
-        OnDie?.Invoke(this);
+
+    public void PlayDeathState(){
+        _state = StateEnemy.Death;
+        _agent.Stop();
+        _animations.PlayDeathAnimation();
+        StartCoroutine(LastTimeOfLiveEnemy());
+    }
+
+    IEnumerator LastTimeOfLiveEnemy(){
+        var willBeGold = (_target.GetState() != KingState.Death);
+        yield return new WaitForSeconds(1.8f);
+        OnDie?.Invoke(this, willBeGold);
+    }
+
+
+    public EnemyData GetLevelData(){
+        return _description.enemyData;
     }
 
     public StateEnemy GetState(){

@@ -8,97 +8,127 @@ public enum KingState{
 }
 
 [RequireComponent(typeof(KingAnimations))]
-public class King : MonoBehaviour{
+public class King : MonoBehaviour, ISaveable{
+    private GameManager _gameManager;
     private KingAnimations _animations;
     private KingState _state;
 
     private Enemy _enemyTarget;
 
-    [SerializeField] private int maxHealth;
+    private int _maxHealth;
     private int _currentHealth;
-    [SerializeField] private int damage;
-    [SerializeField] private float rangeAttack;
+    private int _damage;
 
+    private int _rangeAttackPowTwo = 9;
 
     public event Action UIHealthEvent;
 
-    public void Init(){
-        _state = KingState.Idle;
-        _currentHealth = maxHealth;
+    private DataContainer _dataContainer;
+
+    public void Construct(GameManager gameManager){
+        _gameManager = gameManager;
         _animations = GetComponent<KingAnimations>();
+        _currentHealth = _maxHealth;
+        _state = KingState.Idle;
     }
 
+    public void Refresh(){
+        _currentHealth = _maxHealth;
+        UIHealthEvent.Invoke();
+        _enemyTarget = null;
+        if (_state != KingState.Idle){
+            _state = KingState.Idle;
+            _animations.PlayIdleAnimation();
+        }
+    }
 
     private void Update(){
         switch (_state){
             case KingState.Idle:
                 if (_enemyTarget != null){
                     _state = KingState.Attacking;
-                    return;
+                    _animations.PlayAttackAnimation();
                 }
 
-                _animations.PlayIdleAnimation();
                 break;
             case KingState.Attacking:
                 if (_enemyTarget == null || _enemyTarget.GetState() == StateEnemy.Death){
                     _enemyTarget = null;
                     _state = KingState.Idle;
-                    return;
+                    _animations.PlayIdleAnimation();
                 }
 
-                transform.LookAt(_enemyTarget.transform, Vector3.up);
-                _animations.PlayAttackAnimation();
                 break;
             case KingState.Death:
                 break;
         }
     }
 
+
+    public void Aggro(Enemy enemy){
+        if (_state == KingState.Idle){
+            if ((transform.position - enemy.transform.position).sqrMagnitude < _rangeAttackPowTwo){
+                _enemyTarget = enemy;
+            }
+        }
+    }
+
+    // call in attack animation
+    public void DealDamage(){
+        if (_enemyTarget == null || _enemyTarget.GetState() == StateEnemy.Death) return;
+        transform.LookAt(_enemyTarget.transform, Vector3.up);
+        _enemyTarget.TakeDamage(_damage);
+    }
+
     public void TakeDamage(int countOfDamage){
+        if (_state == KingState.Death) return;
         _currentHealth -= countOfDamage;
         UIHealthEvent?.Invoke();
         if (_currentHealth <= 0){
+            _gameManager.StopGame();
             _state = KingState.Death;
+            _enemyTarget = null;
             _animations.PlayDeadAnimation();
         }
     }
 
 
-    // call in attack animation
-    public void DealDamage(){
-        if (_enemyTarget != null && _enemyTarget.GetState() != StateEnemy.Death){
-            _enemyTarget.TakeDamage(damage);
-        }
+    public void AddDamage(int addDamage){
+        _damage += addDamage;
     }
 
+    public void AddHealth(int health){
+        _maxHealth += health;
+        if (_state != KingState.Death){
+            _currentHealth += health;
+        }
+
+        UIHealthEvent?.Invoke();
+    }
 
     public KingState GetState(){
         return _state;
     }
 
-    public void SetTarget(Enemy enemy){
-        _enemyTarget = enemy;
-    }
-
-    public Enemy GetTarget(){
-        return _enemyTarget;
-    }
-
-    public void AddDamage(int addDamage){
-        damage += addDamage;
-    }
-
-    public void AddHealth(int health){
-        maxHealth += health;
-        _currentHealth += health;
-        UIHealthEvent?.Invoke();
-    }
-
-    public String GetHealthAndMaxHealth(){
-        return _currentHealth + "/" + maxHealth;
+    public String GetStringHealthAndMaxHealth(){
+        return _currentHealth + "/" + _maxHealth;
     }
 
     public float GetPercentageOfHealth(){
-        return (float) _currentHealth / maxHealth;
+        return (float) _currentHealth / _maxHealth;
+    }
+
+    public void WriteDataToContainer(){
+        _dataContainer.maxHealthKing = _maxHealth;
+        _dataContainer.damageKing = _damage;
+    }
+
+    public void LoadDataFromContainer(){
+        _maxHealth = _dataContainer.maxHealthKing;
+        _damage = _dataContainer.damageKing;
+    }
+
+    public void SetDataContainer(DataContainer dataContainer){
+        _dataContainer = dataContainer;
     }
 }
