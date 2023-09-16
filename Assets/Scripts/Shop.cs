@@ -14,9 +14,6 @@ public class Shop : MonoBehaviour, ISaveable{
     private int _priceHealth;
     [SerializeField] private TextMeshProUGUI priceHealthText;
 
-    private int _priceDamage;
-    [SerializeField] private TextMeshProUGUI priceDamageText;
-
     private DataContainer _dataContainer;
 
     public void Construct(WeaponsFactory weaponsFactory, King king){
@@ -25,7 +22,6 @@ public class Shop : MonoBehaviour, ISaveable{
         UpdateGoldUI();
         UpdatePriceHealthUI();
         UpdatePriceWeaponUI();
-        UpdatePriceDamagehUI();
     }
 
     public void TryBuyWeapon(){
@@ -40,37 +36,24 @@ public class Shop : MonoBehaviour, ISaveable{
 
     public void TryBuyHealth(){
         if (_gold < _priceHealth) return;
-        king.AddHealth((int) (_priceHealth * 0.1f));
+        king.AddHealth((int) (_priceHealth * 0.5f));
         _gold -= _priceHealth;
-        _priceHealth += 10;
+        _priceHealth += 5;
         UpdateGoldUI();
         UpdatePriceHealthUI();
     }
 
-    public void TryBuyDamage(){
-        if (_gold >= _priceDamage){
-            _gold -= _priceDamage;
-            king.AddDamage((int) (_priceDamage * 0.01f));
-            _priceDamage += 10;
-            UpdateGoldUI();
-            UpdatePriceDamagehUI();
-        }
-    }
-
-    private void UpdatePriceDamagehUI(){
-        priceDamageText.text = "Damage price:" + _priceDamage;
-    }
 
     private void UpdatePriceHealthUI(){
-        priceHealthText.text = "Health price:" + _priceHealth;
+        priceHealthText.text = _priceHealth.ToString();
     }
 
     private void UpdatePriceWeaponUI(){
-        priceWeaponText.text = "Weapon price:" + _priceWeapon;
+        priceWeaponText.text = _priceWeapon.ToString();
     }
 
     private void UpdateGoldUI(){
-        goldText.text = "Gold: " + _gold;
+        goldText.text = "Золото:\n" + _gold;
     }
 
     public void AddGoldFromEnemy(int newGold){
@@ -81,14 +64,12 @@ public class Shop : MonoBehaviour, ISaveable{
     public void WriteDataToContainer(){
         _dataContainer.gold = _gold;
         _dataContainer.priceHealth = _priceHealth;
-        _dataContainer.priceDamage = _priceDamage;
         _dataContainer.priceWeapon = _priceWeapon;
     }
 
     public void LoadDataFromContainer(){
         _gold = _dataContainer.gold;
         _priceHealth = _dataContainer.priceHealth;
-        _priceDamage = _dataContainer.priceDamage;
         _priceWeapon = _dataContainer.priceWeapon;
     }
 

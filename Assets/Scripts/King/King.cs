@@ -3,7 +3,6 @@ using UnityEngine;
 
 public enum KingState{
     Idle,
-    Attacking,
     Death
 }
 
@@ -17,9 +16,7 @@ public class King : MonoBehaviour, ISaveable{
 
     private int _maxHealth;
     private int _currentHealth;
-    private int _damage;
 
-    private int _rangeAttackPowTwo = 9;
 
     public event Action UIHealthEvent;
 
@@ -42,43 +39,6 @@ public class King : MonoBehaviour, ISaveable{
         }
     }
 
-    private void Update(){
-        switch (_state){
-            case KingState.Idle:
-                if (_enemyTarget != null){
-                    _state = KingState.Attacking;
-                    _animations.PlayAttackAnimation();
-                }
-
-                break;
-            case KingState.Attacking:
-                if (_enemyTarget == null || _enemyTarget.GetState() == StateEnemy.Death){
-                    _enemyTarget = null;
-                    _state = KingState.Idle;
-                    _animations.PlayIdleAnimation();
-                }
-
-                break;
-            case KingState.Death:
-                break;
-        }
-    }
-
-
-    public void Aggro(Enemy enemy){
-        if (_state == KingState.Idle){
-            if ((transform.position - enemy.transform.position).sqrMagnitude < _rangeAttackPowTwo){
-                _enemyTarget = enemy;
-            }
-        }
-    }
-
-    // call in attack animation
-    public void DealDamage(){
-        if (_enemyTarget == null || _enemyTarget.GetState() == StateEnemy.Death) return;
-        transform.LookAt(_enemyTarget.transform, Vector3.up);
-        _enemyTarget.TakeDamage(_damage);
-    }
 
     public void TakeDamage(int countOfDamage){
         if (_state == KingState.Death) return;
@@ -92,10 +52,6 @@ public class King : MonoBehaviour, ISaveable{
         }
     }
 
-
-    public void AddDamage(int addDamage){
-        _damage += addDamage;
-    }
 
     public void AddHealth(int health){
         _maxHealth += health;
@@ -120,12 +76,10 @@ public class King : MonoBehaviour, ISaveable{
 
     public void WriteDataToContainer(){
         _dataContainer.maxHealthKing = _maxHealth;
-        _dataContainer.damageKing = _damage;
     }
 
     public void LoadDataFromContainer(){
         _maxHealth = _dataContainer.maxHealthKing;
-        _damage = _dataContainer.damageKing;
     }
 
     public void SetDataContainer(DataContainer dataContainer){

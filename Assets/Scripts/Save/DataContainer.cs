@@ -7,13 +7,13 @@ public class DataContainer{
 
     public List<CellsInformation> cellsInformation = new List<CellsInformation>();
 
-    public int gold = 15;
+    public int gold = 20;
     public int priceWeapon = 15;
     public int priceHealth = 10;
-    public int priceDamage = 10;
 
-    public int maxHealthKing = 7;
-    public int damageKing = 1;
+    public int maxHealthKing = 9;
+    public int levelShopWeapon = 1;
+    public int maxLevelOfCreatedWeapon = 1;
 }
 
 [Serializable]

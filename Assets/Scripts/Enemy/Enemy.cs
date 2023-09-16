@@ -70,7 +70,6 @@ public class Enemy : MonoBehaviour{
     // call in attack animation
     public void DealDamage(){
         _target.TakeDamage(_description.damage);
-        _target.Aggro(this);
     }
 
     public void TakeDamage(int countOfDamage){

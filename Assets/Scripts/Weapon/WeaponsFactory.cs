@@ -10,6 +10,9 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
 
     private DataContainer _dataContainer;
 
+    private int _levelShopWeapon;
+    private int _maxLevelOfCreatedWeapon;
+
     public void Construct(WeaponDescriptions weaponDescriptions, Cells cells){
         this.weaponDescriptions = weaponDescriptions;
         _cells = cells;
@@ -22,7 +25,7 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
 
     public bool TryCreateWeapon(){
         if (_cells.TryGetCell(out var cell)){
-            CreateWeapon(1, cell);
+            CreateWeapon(_levelShopWeapon, cell);
             return true;
         }
         else return false;
@@ -30,6 +33,8 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
 
     private void CreateWeapon(int levelWeapon, Cell cell){
         Weapon weapon = _lazyWeaponPool.TryGetWeapon(levelWeapon);
+
+
         if (weapon == null){
             int index = levelWeapon - 1;
             weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
@@ -47,6 +52,13 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
             return false;
         }
 
+        if (newLevel > _maxLevelOfCreatedWeapon){
+            _maxLevelOfCreatedWeapon = newLevel;
+            if (_maxLevelOfCreatedWeapon % 8 == 0){
+                _levelShopWeapon += 4;
+            }
+        }
+
         HideWeapon(weapon1);
         HideWeapon(weapon2);
         CreateWeapon(newLevel, cell);
@@ -56,6 +68,8 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
 
     public void WriteDataToContainer(){
         _cells.SaveDataToContainer(_dataContainer);
+        _dataContainer.levelShopWeapon = _levelShopWeapon;
+        _dataContainer.maxLevelOfCreatedWeapon = _maxLevelOfCreatedWeapon;
     }
 
     public void LoadDataFromContainer(){
@@ -67,6 +81,9 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
                 CreateWeapon(levelOfWeapon, _cells._arrayCells[indexOfCell]);
             }
         }
+
+        _levelShopWeapon = _dataContainer.levelShopWeapon;
+        _maxLevelOfCreatedWeapon = _dataContainer.maxLevelOfCreatedWeapon;
     }
 
     public void SetDataContainer(DataContainer dataContainer){
