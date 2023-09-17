@@ -10,6 +10,7 @@ public enum WeaponMode{
 
 [RequireComponent(typeof(Collider))]
 public class Weapon : MonoBehaviour{
+    [SerializeField] private ParticleSystem atackFX;
     private WeaponsFactory _factory;
     private Cell _cell;
 
@@ -74,6 +75,7 @@ public class Weapon : MonoBehaviour{
                 _aimTarget.TakeDamage(_description.damage);
                 transform.DOShakeScale(_description.attackDelay * 0.7f, 0.1f);
                 _timeFromLastAttack = Time.time;
+                atackFX.Play();
             }
         }
     }

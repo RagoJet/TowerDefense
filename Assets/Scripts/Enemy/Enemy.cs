@@ -12,6 +12,7 @@ public enum StateEnemy{
 
 [RequireComponent(typeof(EnemyAnimations))]
 public class Enemy : MonoBehaviour{
+    [SerializeField] private ParticleSystem attackFX;
     private EnemyDescription _description;
     private EnemyAnimations _animations;
     private StateEnemy _state;
@@ -62,6 +63,7 @@ public class Enemy : MonoBehaviour{
     }
 
     public void PlayAttackState(){
+        transform.LookAt(_target.transform);
         _state = StateEnemy.Attacking;
         _animations.PlayAttackAnimation();
     }
@@ -70,6 +72,9 @@ public class Enemy : MonoBehaviour{
     // call in attack animation
     public void DealDamage(){
         _target.TakeDamage(_description.damage);
+        if (attackFX != null){
+            attackFX.Play();
+        }
     }
 
     public void TakeDamage(int countOfDamage){

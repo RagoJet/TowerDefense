@@ -285,6 +285,7 @@ Transform:
   - {fileID: 5954334966016940342}
   - {fileID: 3370605537878853745}
   - {fileID: 4180173265863649919}
+  - {fileID: 7410241519154007711}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -313,4 +314,120 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2774dddd1ef40d6a1f99eb37849b2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeParts: []
+  atackFX: {fileID: 7410241519139851231}
+--- !u!1001 &5815981930393457526
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6115762642331072598}
+    m_Modifications:
+    - target: {fileID: 3918399573796602313, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_Name
+      value: AttackWeaponFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.761
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.448
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3918399573812304041, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584839671896835367, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: cameraShake.shakeCurve.m_Curve.Array.data[0].time
+      value: 0.009160651
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584839671896835367, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: cameraShake.shakeCurve.m_Curve.Array.data[0].value
+      value: 0.10916262
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584839671896835367, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: cameraShake.shakeCurve.m_Curve.Array.data[0].inSlope
+      value: -0.11017187
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584839671896835367, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: cameraShake.shakeCurve.m_Curve.Array.data[1].inSlope
+      value: -0.11017187
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584839671896835367, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: cameraShake.shakeCurve.m_Curve.Array.data[0].outSlope
+      value: -0.11017187
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584839671896835367, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+        type: 3}
+      propertyPath: cameraShake.shakeCurve.m_Curve.Array.data[1].outSlope
+      value: -0.11017187
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 679e3dfe2f080ca41a3bbd987244ee21, type: 3}
+--- !u!198 &7410241519139851231 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3918399573812304041, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+    type: 3}
+  m_PrefabInstance: {fileID: 5815981930393457526}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7410241519154007711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
+    type: 3}
+  m_PrefabInstance: {fileID: 5815981930393457526}
+  m_PrefabAsset: {fileID: 0}

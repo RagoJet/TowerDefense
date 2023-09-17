@@ -56,6 +56,7 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
             _maxLevelOfCreatedWeapon = newLevel;
             if (_maxLevelOfCreatedWeapon % 8 == 0){
                 _levelShopWeapon += 4;
+                ReplaceUselessWeapons();
             }
         }
 
@@ -64,6 +65,17 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
         CreateWeapon(newLevel, cell);
 
         return true;
+    }
+
+    private void ReplaceUselessWeapons(){
+        for (int i = 0; i < _cells._arrayCells.Length; i++){
+            if (!_cells._arrayCells[i].IsAvailable()){
+                if (_cells._arrayCells[i].GetWeaponOfThisCell().GetLevelWeapon() < _levelShopWeapon){
+                    Destroy(_cells._arrayCells[i].GetWeaponOfThisCell().gameObject);
+                    CreateWeapon(_levelShopWeapon, _cells._arrayCells[i]);
+                }
+            }
+        }
     }
 
     public void WriteDataToContainer(){

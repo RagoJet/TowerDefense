@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour, ISaveable{
     private SaveLoadController _saveLoadController;
     private SaveablesObjects _saveablesObjects;
 
+    [SerializeField] private ParticleSystem WaveFXHuman;
+    [SerializeField] private ParticleSystem WaveFXElf;
+    [SerializeField] private ParticleSystem WaveFXUndead;
+    [SerializeField] private ParticleSystem WaveFXOrc;
+
     private void Awake(){
         _saveLoadController = new SaveLoadController();
         _dataContainer = _saveLoadController.GetDataContainerFromFile();
@@ -66,16 +71,25 @@ public class GameManager : MonoBehaviour, ISaveable{
         _saveLoadController.SaveDataContainerToFile(_dataContainer);
         theKing.Refresh();
         switch (level){
+            case 1:
+                WaveFXHuman.Play();
+                StartHumanWave(level);
+                weaponsFactory.TryCreateWeapon();
+                break;
             case < 10:
+                WaveFXHuman.Play();
                 StartHumanWave(level);
                 break;
             case < 20:
+                WaveFXElf.Play();
                 StartElfWave(level);
                 break;
             case < 30:
+                WaveFXUndead.Play();
                 StartUndeadWave(level);
                 break;
             case < 40:
+                WaveFXOrc.Play();
                 StartOrcWave(level);
                 break;
         }

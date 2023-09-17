@@ -8,6 +8,9 @@ public enum KingState{
 
 [RequireComponent(typeof(KingAnimations))]
 public class King : MonoBehaviour, ISaveable{
+    [SerializeField] private ParticleSystem deathKingFx;
+    [SerializeField] private ParticleSystem reincarnationKingFx;
+    [SerializeField] private ParticleSystem addHealthFX;
     private GameManager _gameManager;
     private KingAnimations _animations;
     private KingState _state;
@@ -36,6 +39,7 @@ public class King : MonoBehaviour, ISaveable{
         if (_state != KingState.Idle){
             _state = KingState.Idle;
             _animations.PlayIdleAnimation();
+            reincarnationKingFx.Play();
         }
     }
 
@@ -49,6 +53,7 @@ public class King : MonoBehaviour, ISaveable{
             _state = KingState.Death;
             _enemyTarget = null;
             _animations.PlayDeadAnimation();
+            deathKingFx.Play();
         }
     }
 
@@ -60,6 +65,7 @@ public class King : MonoBehaviour, ISaveable{
         }
 
         UIHealthEvent?.Invoke();
+        addHealthFX.Play();
     }
 
     public KingState GetState(){

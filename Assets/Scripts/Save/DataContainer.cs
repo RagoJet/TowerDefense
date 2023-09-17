@@ -11,7 +11,7 @@ public class DataContainer{
     public int priceWeapon = 15;
     public int priceHealth = 10;
 
-    public int maxHealthKing = 9;
+    public int maxHealthKing = 10;
     public int levelShopWeapon = 1;
     public int maxLevelOfCreatedWeapon = 1;
 }
