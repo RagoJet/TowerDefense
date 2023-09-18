@@ -4,7 +4,7 @@ public class LazyWeaponPool{
     readonly Dictionary<int, Queue<Weapon>> WeaponDictionary = new();
 
     public void Init(){
-        for (int i = 1; i < 24; i++){
+        for (int i = 1; i <= 24; i++){
             WeaponDictionary[i] = new Queue<Weapon>();
         }
     }

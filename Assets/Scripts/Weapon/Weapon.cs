@@ -76,6 +76,7 @@ public class Weapon : MonoBehaviour{
                 transform.DOShakeScale(_description.attackDelay * 0.7f, 0.1f);
                 _timeFromLastAttack = Time.time;
                 atackFX.Play();
+                AudioManager.Instance.PlayShotSound(_description.level);
             }
         }
     }

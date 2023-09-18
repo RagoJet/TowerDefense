@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class KingHealthUI : MonoBehaviour{
-    [SerializeField] King king;
+    King king;
     [SerializeField] private Image currentHealthBar;
 
     [SerializeField] private TextMeshProUGUI healthBarText;

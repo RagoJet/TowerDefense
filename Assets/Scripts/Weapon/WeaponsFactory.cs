@@ -54,8 +54,8 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
 
         if (newLevel > _maxLevelOfCreatedWeapon){
             _maxLevelOfCreatedWeapon = newLevel;
-            if (_maxLevelOfCreatedWeapon % 8 == 0){
-                _levelShopWeapon += 4;
+            if (_maxLevelOfCreatedWeapon % 4 == 0){
+                _levelShopWeapon += 1;
                 ReplaceUselessWeapons();
             }
         }
