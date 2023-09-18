@@ -285,7 +285,7 @@ Transform:
   - {fileID: 7282472737554635001}
   - {fileID: 7387751135485933907}
   - {fileID: 8412720002394717282}
-  - {fileID: 569727923464330315}
+  - {fileID: 4616893719201921189}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -314,8 +314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2774dddd1ef40d6a1f99eb37849b2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atackFX: {fileID: 569727923479533835}
---- !u!1001 &3569356837847400866
+  attacksFX:
+  - {fileID: 4616893719221321189}
+--- !u!1001 &8535011540459644236
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -334,21 +335,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -360,32 +346,32 @@ PrefabInstance:
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.857
       objectReference: {fileID: 0}
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90.00001
       objectReference: {fileID: 0}
     - target: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
         type: 3}
@@ -397,22 +383,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4584839671896835367, guid: 679e3dfe2f080ca41a3bbd987244ee21,
-        type: 3}
-      propertyPath: animatedLights.Array.data[0].light
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679e3dfe2f080ca41a3bbd987244ee21, type: 3}
---- !u!4 &569727923464330315 stripped
+--- !u!4 &4616893719201921189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3918399573797101033, guid: 679e3dfe2f080ca41a3bbd987244ee21,
     type: 3}
-  m_PrefabInstance: {fileID: 3569356837847400866}
+  m_PrefabInstance: {fileID: 8535011540459644236}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &569727923479533835 stripped
+--- !u!198 &4616893719221321189 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3918399573812304041, guid: 679e3dfe2f080ca41a3bbd987244ee21,
     type: 3}
-  m_PrefabInstance: {fileID: 3569356837847400866}
+  m_PrefabInstance: {fileID: 8535011540459644236}
   m_PrefabAsset: {fileID: 0}

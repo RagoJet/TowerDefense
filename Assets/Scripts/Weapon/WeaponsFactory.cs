@@ -31,6 +31,7 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
         else return false;
     }
 
+
     private void CreateWeapon(int levelWeapon, Cell cell){
         Weapon weapon = _lazyWeaponPool.TryGetWeapon(levelWeapon);
 
