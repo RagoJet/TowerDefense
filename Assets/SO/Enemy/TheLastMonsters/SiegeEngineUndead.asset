@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdbd07d04e241cfb8e3a32f4a03144b, type: 3}
+  m_Name: SiegeEngineUndead
+  m_EditorClassIdentifier: 
+  enemyData:
+    levelOfUnit: 27
+    levelOfRace: 4
+  damage: 10
+  maxHealth: 10
+  gold: 10
+  enemyPrefab: {fileID: -4260135005521121294, guid: 54c448a6ac097c245aa65b2998cc4257,
+    type: 3}

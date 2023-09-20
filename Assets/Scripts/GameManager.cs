@@ -74,24 +74,19 @@ public class GameManager : MonoBehaviour, ISaveable{
         theKing.Refresh();
         switch (level){
             case 1:
-                WaveFXHuman.Play();
                 StartHumanWave(level);
                 weaponsFactory.TryCreateWeapon();
                 break;
             case < 10:
-                WaveFXHuman.Play();
                 StartHumanWave(level);
                 break;
             case < 20:
-                WaveFXElf.Play();
                 StartElfWave(level);
                 break;
             case < 30:
-                WaveFXUndead.Play();
                 StartUndeadWave(level);
                 break;
             case < 40:
-                WaveFXOrc.Play();
                 StartOrcWave(level);
                 break;
             default:
@@ -101,6 +96,7 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartHumanWave(int level){
+        WaveFXHuman.Play();
         countOfAliveEnemies = level;
         EnemyData humanEnemyData = new EnemyData(0, 0);
         int levelOfUnit = Mathf.Clamp(level, 0, 7);
@@ -111,6 +107,7 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartElfWave(int level){
+        WaveFXElf.Play();
         countOfAliveEnemies = (int) (level * 0.4f);
         EnemyData elfEnemyData = new EnemyData(1, 0);
         int levelOfUnit = Mathf.Clamp(level - 10, 0, 7);
@@ -121,6 +118,7 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartUndeadWave(int level){
+        WaveFXUndead.Play();
         countOfAliveEnemies = (int) (level * 0.3f);
         EnemyData undeadEnemyData = new EnemyData(2, 0);
         int levelOfUnit = Mathf.Clamp(level - 20, 0, 7);
@@ -131,6 +129,7 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartOrcWave(int level){
+        WaveFXOrc.Play();
         countOfAliveEnemies = (int) (level * 0.2f);
         EnemyData orcEnemyData = new EnemyData(3, 0);
         int levelOfUnit = Mathf.Clamp(level - 30, 0, 7);
@@ -141,10 +140,26 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartLastMonstersWave(int level){
+        var x = Random.Range(0, 4);
+        switch (x){
+            case 0:
+                WaveFXHuman.Play();
+                break;
+            case 1:
+                WaveFXElf.Play();
+                break;
+            case 2:
+                WaveFXUndead.Play();
+                break;
+            case 3:
+                WaveFXOrc.Play();
+                break;
+        }
+
         countOfAliveEnemies = 10;
         EnemyData enemyData = new EnemyData(4, 0);
         for (int i = 0; i < countOfAliveEnemies; i++){
-            enemyData.levelOfUnit = Random.Range(0, 27);
+            enemyData.levelOfUnit = Random.Range(0, 28);
             enemiesFactory.CreateAndDirectEnemy(enemyData);
         }
     }
