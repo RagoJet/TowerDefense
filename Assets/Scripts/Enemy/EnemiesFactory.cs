@@ -34,7 +34,12 @@ public class EnemiesFactory : MonoBehaviour{
 
     private void HideEnemy(Enemy enemy, bool willBeGold){
         if (willBeGold){
-            shop.AddGoldFromEnemy(enemy.GetGold());
+            if (enemy.GetEnemyData().levelOfRace == 4){
+                shop.AddGoldFromEnemy(enemy.GetGold() * gameManager.CurrentGameLevel);
+            }
+            else{
+                shop.AddGoldFromEnemy(enemy.GetGold());
+            }
         }
 
         enemy.OnDie -= HideEnemy;
@@ -51,7 +56,14 @@ public class EnemiesFactory : MonoBehaviour{
 
         enemy.OnDie += HideEnemy;
         _listOfAliveEnemies.Add(enemy);
-        enemy.Construct(theGate.transform);
+
+        if (enemy.GetEnemyData().levelOfRace < 4){
+            enemy.Construct(theGate.transform);
+            return;
+        }
+
+        enemy.Construct(theKing, theGate.transform, enemyDescriptions.ListOfLastMonster[enemyData.levelOfUnit],
+            gameManager.CurrentGameLevel);
     }
 
     private Enemy CreateEnemy(EnemyData enemyData){
@@ -75,6 +87,11 @@ public class EnemiesFactory : MonoBehaviour{
             case 3:
                 enemy = Instantiate(enemyDescriptions.ListOfOrcs[levelOfUnit].enemyPrefab);
                 enemy.Construct(theKing, theGate.transform, enemyDescriptions.ListOfOrcs[levelOfUnit]);
+                return enemy;
+            case 4:
+                enemy = Instantiate(enemyDescriptions.ListOfLastMonster[levelOfUnit].enemyPrefab);
+                enemy.Construct(theKing, theGate.transform, enemyDescriptions.ListOfLastMonster[levelOfUnit],
+                    gameManager.CurrentGameLevel);
                 return enemy;
         }
 

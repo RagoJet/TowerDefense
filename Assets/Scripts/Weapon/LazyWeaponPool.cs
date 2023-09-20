@@ -10,7 +10,7 @@ public class LazyWeaponPool{
     }
 
     public void HideWeapon(Weapon weapon){
-        Queue<Weapon> queue = WeaponDictionary[weapon.GetLevelWeapon()];
+        Queue<Weapon> queue = WeaponDictionary[weapon.GetLevel()];
         queue.Enqueue(weapon);
         weapon.gameObject.SetActive(false);
     }

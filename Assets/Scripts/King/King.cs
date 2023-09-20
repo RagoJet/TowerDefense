@@ -47,14 +47,17 @@ public class King : MonoBehaviour, ISaveable{
     public void TakeDamage(int countOfDamage){
         if (_state == KingState.Death) return;
         _currentHealth -= countOfDamage;
-        UIHealthEvent?.Invoke();
+
         if (_currentHealth <= 0){
+            _currentHealth = 0;
             _gameManager.StopGame();
             _state = KingState.Death;
             _enemyTarget = null;
             _animations.PlayDeadAnimation();
             deathKingFx.Play();
         }
+
+        UIHealthEvent?.Invoke();
     }
 
 

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Dragon(Drake)
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 6
+    levelOfUnit: 5
     levelOfRace: 3
-  damage: 200
-  maxHealth: 700
+  damage: 400
+  maxHealth: 1200
   gold: 500
   enemyPrefab: {fileID: -3360872284147718806, guid: 82a1497c2e9af3240a590efbef41e87a,
     type: 3}

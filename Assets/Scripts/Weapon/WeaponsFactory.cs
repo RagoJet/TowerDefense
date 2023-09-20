@@ -48,22 +48,44 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
     }
 
     public bool TryMergeWeapons(Weapon weapon1, Weapon weapon2, Cell cell){
-        int newLevel = weapon1.GetLevelWeapon() + 1;
+        int newLevel = weapon1.GetLevel() + 1;
         if (newLevel > maxLevelWeapons){
             return false;
-        }
-
-        if (newLevel > _maxLevelOfCreatedWeapon){
-            _maxLevelOfCreatedWeapon = newLevel;
-            if (_maxLevelOfCreatedWeapon % 4 == 0){
-                _levelShopWeapon += 1;
-                ReplaceUselessWeapons();
-            }
         }
 
         HideWeapon(weapon1);
         HideWeapon(weapon2);
         CreateWeapon(newLevel, cell);
+
+        if (newLevel > _maxLevelOfCreatedWeapon){
+            _maxLevelOfCreatedWeapon = newLevel;
+            switch (_maxLevelOfCreatedWeapon){
+                case 4:
+                    _levelShopWeapon = 2;
+                    ReplaceUselessWeapons();
+                    break;
+                case 9:
+                    _levelShopWeapon = 5;
+                    ReplaceUselessWeapons();
+                    break;
+                case 13:
+                    _levelShopWeapon = 9;
+                    ReplaceUselessWeapons();
+                    break;
+                case 17:
+                    _levelShopWeapon = 13;
+                    ReplaceUselessWeapons();
+                    break;
+                case 21:
+                    _levelShopWeapon = 17;
+                    ReplaceUselessWeapons();
+                    break;
+                case 24:
+                    _levelShopWeapon = 24;
+                    ReplaceUselessWeapons();
+                    break;
+            }
+        }
 
         return true;
     }
@@ -71,8 +93,8 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
     private void ReplaceUselessWeapons(){
         for (int i = 0; i < _cells._arrayCells.Length; i++){
             if (!_cells._arrayCells[i].IsAvailable()){
-                if (_cells._arrayCells[i].GetWeaponOfThisCell().GetLevelWeapon() < _levelShopWeapon){
-                    Destroy(_cells._arrayCells[i].GetWeaponOfThisCell().gameObject);
+                if (_cells._arrayCells[i].GetWeapon().GetLevel() < _levelShopWeapon){
+                    Destroy(_cells._arrayCells[i].GetWeapon().gameObject);
                     CreateWeapon(_levelShopWeapon, _cells._arrayCells[i]);
                 }
             }

@@ -23,9 +23,11 @@ public class GameManager : MonoBehaviour, ISaveable{
     [SerializeField] private Cells cells;
 
     [SerializeField] private Button restartButton;
-
     public GameState state = GameState.Stop;
+
     private int _currentGameLevel = 1;
+
+    public int CurrentGameLevel => _currentGameLevel;
 
     public int countOfAliveEnemies;
 
@@ -92,6 +94,9 @@ public class GameManager : MonoBehaviour, ISaveable{
                 WaveFXOrc.Play();
                 StartOrcWave(level);
                 break;
+            default:
+                StartLastMonstersWave(level);
+                break;
         }
     }
 
@@ -106,7 +111,7 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartElfWave(int level){
-        countOfAliveEnemies = (int) (level * 0.4);
+        countOfAliveEnemies = (int) (level * 0.4f);
         EnemyData elfEnemyData = new EnemyData(1, 0);
         int levelOfUnit = Mathf.Clamp(level - 10, 0, 7);
         for (int i = 0; i < level * 0.4; i++){
@@ -116,7 +121,7 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartUndeadWave(int level){
-        countOfAliveEnemies = (int) (level * 0.3);
+        countOfAliveEnemies = (int) (level * 0.3f);
         EnemyData undeadEnemyData = new EnemyData(2, 0);
         int levelOfUnit = Mathf.Clamp(level - 20, 0, 7);
         for (int i = 0; i < countOfAliveEnemies; i++){
@@ -126,12 +131,21 @@ public class GameManager : MonoBehaviour, ISaveable{
     }
 
     private void StartOrcWave(int level){
-        countOfAliveEnemies = (int) (level * 0.2);
+        countOfAliveEnemies = (int) (level * 0.2f);
         EnemyData orcEnemyData = new EnemyData(3, 0);
         int levelOfUnit = Mathf.Clamp(level - 30, 0, 7);
         for (int i = 0; i < countOfAliveEnemies; i++){
             orcEnemyData.levelOfUnit = Random.Range(0, levelOfUnit);
             enemiesFactory.CreateAndDirectEnemy(orcEnemyData);
+        }
+    }
+
+    private void StartLastMonstersWave(int level){
+        countOfAliveEnemies = 10;
+        EnemyData enemyData = new EnemyData(4, 0);
+        for (int i = 0; i < countOfAliveEnemies; i++){
+            enemyData.levelOfUnit = Random.Range(0, 27);
+            enemiesFactory.CreateAndDirectEnemy(enemyData);
         }
     }
 

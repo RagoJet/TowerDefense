@@ -25,22 +25,33 @@ public class Enemy : MonoBehaviour{
 
     private float _timeFromLastCheck;
 
+    private int _levelOfGame;
+
     private void Awake(){
         _agent = GetComponent<NavMeshAgent>();
         _animations = GetComponent<EnemyAnimations>();
     }
 
+    public void Construct(King target, Transform theGateTransform, EnemyDescription description, int levelOfGame){
+        _levelOfGame = levelOfGame;
+        _description = description;
+        transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
+        _target = target;
+        _currentHealth = _description.maxHealth * _levelOfGame;
+        PlayRunState();
+    }
+
 
     public void Construct(King target, Transform theGateTransform, EnemyDescription description){
         _description = description;
-        transform.position = theGateTransform.position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-1f, -2f));
+        transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
         _target = target;
         _currentHealth = _description.maxHealth;
         PlayRunState();
     }
 
     public void Construct(Transform theGateTransform){
-        transform.position = theGateTransform.position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-1f, -2f));
+        transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
         _currentHealth = _description.maxHealth;
         PlayRunState();
     }
@@ -71,6 +82,16 @@ public class Enemy : MonoBehaviour{
 
     // call in attack animation
     public void DealDamage(){
+        transform.LookAt(_target.transform);
+        if (GetEnemyData().levelOfRace == 4){
+            _target.TakeDamage(_description.damage * _levelOfGame);
+            if (attackFX != null){
+                attackFX.Play();
+            }
+
+            return;
+        }
+
         _target.TakeDamage(_description.damage);
         if (attackFX != null){
             attackFX.Play();
@@ -100,7 +121,7 @@ public class Enemy : MonoBehaviour{
     }
 
 
-    public EnemyData GetLevelData(){
+    public EnemyData GetEnemyData(){
         return _description.enemyData;
     }
 

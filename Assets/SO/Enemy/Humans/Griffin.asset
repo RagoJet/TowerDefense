@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyData:
     levelOfUnit: 5
     levelOfRace: 0
-  damage: 16
+  damage: 14
   maxHealth: 40
-  gold: 50
+  gold: 35
   enemyPrefab: {fileID: -5343157802767195066, guid: 24ba327de4017424597b5fe8eac72655,
     type: 3}

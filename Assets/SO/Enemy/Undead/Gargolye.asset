@@ -17,6 +17,6 @@ MonoBehaviour:
     levelOfRace: 2
   damage: 170
   maxHealth: 170
-  gold: 150
+  gold: 140
   enemyPrefab: {fileID: -4212325333855316193, guid: d5c89dbee61880041a417ae7c6fcfc32,
     type: 3}

@@ -9,10 +9,14 @@ public class LazyEnemyPool{
                 _enemyDictionary[new EnemyData(levelRace, levelUnit)] = new Queue<Enemy>();
             }
         }
+
+        for (int i = 0; i < 28; i++){
+            _enemyDictionary[new EnemyData(4, i)] = new Queue<Enemy>();
+        }
     }
 
     public void HideEnemy(Enemy enemy){
-        Queue<Enemy> queue = _enemyDictionary[enemy.GetLevelData()];
+        Queue<Enemy> queue = _enemyDictionary[enemy.GetEnemyData()];
         queue.Enqueue(enemy);
         enemy.gameObject.SetActive(false);
     }

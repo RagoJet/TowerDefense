@@ -14,6 +14,9 @@ public class Shop : MonoBehaviour, ISaveable{
     private int _priceHealth;
     [SerializeField] private TextMeshProUGUI priceHealthText;
 
+    private int _goldForAds;
+    [SerializeField] private TextMeshProUGUI goldForAdsText;
+
     private DataContainer _dataContainer;
 
     public void Construct(WeaponsFactory weaponsFactory, King king){
@@ -22,6 +25,12 @@ public class Shop : MonoBehaviour, ISaveable{
         UpdateGoldUI();
         UpdatePriceHealthUI();
         UpdatePriceWeaponUI();
+        UpdateGoldForAdsUI();
+    }
+
+    private void UpdateGoldForAdsUI(){
+        _goldForAds = (int) (_priceHealth * 2.5f);
+        goldForAdsText.text = _goldForAds.ToString();
     }
 
     public void TryBuyWeapon(){
@@ -41,15 +50,22 @@ public class Shop : MonoBehaviour, ISaveable{
         _priceHealth += 5;
         UpdateGoldUI();
         UpdatePriceHealthUI();
+        UpdateGoldForAdsUI();
     }
 
 
+    public void TryWatchAds(){
+        // watch ads
+        _gold += _goldForAds;
+        UpdateGoldUI();
+    }
+
     private void UpdatePriceHealthUI(){
-        priceHealthText.text = _priceHealth.ToString();
+        priceHealthText.text = "Цена здоровья: " + _priceHealth;
     }
 
     private void UpdatePriceWeaponUI(){
-        priceWeaponText.text = _priceWeapon.ToString();
+        priceWeaponText.text = "Цена оружия: " + _priceWeapon;
     }
 
     private void UpdateGoldUI(){

@@ -118,8 +118,8 @@ public class Weapon : MonoBehaviour{
                     FreeTheCell();
                     OccupyTheCell(targetCell);
                 }
-                else if (GetLevelWeapon() == targetCell.GetWeaponOfThisCell().GetLevelWeapon()){
-                    if (_factory.TryMergeWeapons(this, targetCell.GetWeaponOfThisCell(), targetCell) == false){
+                else if (GetLevel() == targetCell.GetWeapon().GetLevel()){
+                    if (_factory.TryMergeWeapons(this, targetCell.GetWeapon(), targetCell) == false){
                         ReturnPositionToCell();
                     }
                 }
@@ -148,7 +148,7 @@ public class Weapon : MonoBehaviour{
         _cell = null;
     }
 
-    public int GetLevelWeapon(){
+    public int GetLevel(){
         return _description.level;
     }
 

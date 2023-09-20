@@ -24,7 +24,7 @@ public class Cells : MonoBehaviour{
         for (int i = 0; i < _arrayCells.Length; i++){
             if (!_arrayCells[i].IsAvailable()){
                 dataContainer.cellsInformation.Add(new CellsInformation(i,
-                    _arrayCells[i].GetWeaponOfThisCell().GetLevelWeapon()));
+                    _arrayCells[i].GetWeapon().GetLevel()));
             }
         }
     }
