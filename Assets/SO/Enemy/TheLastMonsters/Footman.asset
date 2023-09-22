@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Footman
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 9
+    levelOfUnit: 12
     levelOfRace: 4
   damage: 5
   maxHealth: 5
-  gold: 4
+  gold: 2
   enemyPrefab: {fileID: -6627810699475886391, guid: 2ba054e4fce77464c8abc9ade7bc4a1b,
     type: 3}

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DemonHunter
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 2
+    levelOfUnit: 7
     levelOfRace: 4
   damage: 9
   maxHealth: 7
-  gold: 9
+  gold: 5
   enemyPrefab: {fileID: -4303174308480970710, guid: dd15e287b758a1c428887fbfeb5e2734,
     type: 3}

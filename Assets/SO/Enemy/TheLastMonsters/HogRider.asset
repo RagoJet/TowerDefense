@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: HogRider
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 21
+    levelOfUnit: 17
     levelOfRace: 4
   damage: 9
   maxHealth: 7
-  gold: 9
+  gold: 5
   enemyPrefab: {fileID: -6416233001000467654, guid: 906e43d6c5d02684ea73fb7e2b56700b,
     type: 3}

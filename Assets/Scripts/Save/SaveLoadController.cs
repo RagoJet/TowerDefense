@@ -4,16 +4,16 @@ using UnityEngine;
 public class SaveLoadController{
     private string _filePath = Application.persistentDataPath + @"\SaveFile.txt";
 
-    public void SaveDataContainerToFile(DataContainer dataContainer){
+    public void SaveDataContainer(DataContainer dataContainer){
         string json = JsonUtility.ToJson(dataContainer);
+
         File.WriteAllText(_filePath, json);
     }
 
-    public DataContainer GetDataContainerFromFile(){
+    public DataContainer GetDataContainer(){
         if (File.Exists(_filePath)){
-            string json = File.ReadAllText(_filePath);
-            Debug.Log(json);
-            return JsonUtility.FromJson<DataContainer>(json);
+            string jsonFile = File.ReadAllText(_filePath);
+            return JsonUtility.FromJson<DataContainer>(jsonFile);
         }
         else{
             return new DataContainer();

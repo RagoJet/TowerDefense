@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Dryad
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 4
+    levelOfUnit: 10
     levelOfRace: 4
   damage: 9
   maxHealth: 7
-  gold: 9
+  gold: 4
   enemyPrefab: {fileID: -4657269405315634758, guid: 0e1db1bbfb2d77043a1741e09299defb,
     type: 3}

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Berserker
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 16
+    levelOfUnit: 3
     levelOfRace: 4
   damage: 7
   maxHealth: 7
-  gold: 6
+  gold: 4
   enemyPrefab: {fileID: -2838973553007645550, guid: a9a8fba3aa1b6a94fa730c32d92f2a8b,
     type: 3}

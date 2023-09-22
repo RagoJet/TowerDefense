@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Griffin
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 10
+    levelOfUnit: 14
     levelOfRace: 4
   damage: 12
   maxHealth: 10
-  gold: 11
+  gold: 6
   enemyPrefab: {fileID: -5343157802767195066, guid: 24ba327de4017424597b5fe8eac72655,
     type: 3}

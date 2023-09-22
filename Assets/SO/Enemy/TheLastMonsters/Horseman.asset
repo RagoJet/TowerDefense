@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Horseman
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 11
+    levelOfUnit: 18
     levelOfRace: 4
   damage: 9
   maxHealth: 7
-  gold: 9
+  gold: 6
   enemyPrefab: {fileID: 1159097912890256849, guid: 2f7f31ae6e2ecea4395cfc9508fdc477,
     type: 3}

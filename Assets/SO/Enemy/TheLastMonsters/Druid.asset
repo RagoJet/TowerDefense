@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Druid
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 3
+    levelOfUnit: 9
     levelOfRace: 4
   damage: 7
   maxHealth: 6
-  gold: 7
+  gold: 4
   enemyPrefab: {fileID: 285539338105418249, guid: 89e2328c95913a149a8e8487c52bb453,
     type: 3}

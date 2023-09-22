@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Crossbowman
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 22
+    levelOfUnit: 4
     levelOfRace: 4
   damage: 6
   maxHealth: 4
-  gold: 5
+  gold: 2
   enemyPrefab: {fileID: 8561577779905125985, guid: ad7da9d7164f93c42af8e5e2b6e1c2be,
     type: 3}

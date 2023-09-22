@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Headhunter
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 20
+    levelOfUnit: 16
     levelOfRace: 4
   damage: 6
   maxHealth: 4
-  gold: 5
+  gold: 2
   enemyPrefab: {fileID: -2790898540425807164, guid: 2ae356fbbb0f5d142855f30704baa210,
     type: 3}

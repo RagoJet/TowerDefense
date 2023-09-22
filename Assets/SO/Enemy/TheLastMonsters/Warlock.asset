@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Warlock
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 19
+    levelOfUnit: 27
     levelOfRace: 4
   damage: 7
   maxHealth: 6
-  gold: 7
+  gold: 4
   enemyPrefab: {fileID: -7824799794871591613, guid: b1875f15cf1ca494bb70651197778eb4,
     type: 3}

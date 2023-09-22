@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BattleOwl
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 1
+    levelOfUnit: 2
     levelOfRace: 4
-  damage: 12
-  maxHealth: 10
-  gold: 11
+  damage: 10
+  maxHealth: 9
+  gold: 7
   enemyPrefab: {fileID: -9170936962054668678, guid: 13295a988a293f545997ddd7278def79,
     type: 3}

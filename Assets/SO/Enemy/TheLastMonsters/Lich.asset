@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Lich
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 26
+    levelOfUnit: 20
     levelOfRace: 4
   damage: 7
   maxHealth: 6
-  gold: 7
+  gold: 4
   enemyPrefab: {fileID: -7950100592298115347, guid: b5ef4f71da382804cb2595cc06ccc9c4,
     type: 3}

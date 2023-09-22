@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DeathRider
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 24
+    levelOfUnit: 6
     levelOfRace: 4
   damage: 9
   maxHealth: 7
-  gold: 8
+  gold: 5
   enemyPrefab: {fileID: 5133545268825661581, guid: ae52ea32ca7c53945a75dd7b0d93a5bd,
     type: 3}

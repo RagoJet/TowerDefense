@@ -40,9 +40,11 @@ public class GameManager : MonoBehaviour, ISaveable{
     [SerializeField] private ParticleSystem WaveFXUndead;
     [SerializeField] private ParticleSystem WaveFXOrc;
 
+    [SerializeField] private Image rulesImage;
+
     private void Awake(){
         _saveLoadController = new SaveLoadController();
-        _dataContainer = _saveLoadController.GetDataContainerFromFile();
+        _dataContainer = _saveLoadController.GetDataContainer();
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);
 
         weaponsFactory.Construct(weaponDescriptions, cells);
@@ -67,12 +69,21 @@ public class GameManager : MonoBehaviour, ISaveable{
         restartButton.onClick.AddListener(RestartLevel);
     }
 
+    public void IGotIt(){
+        _currentGameLevel++;
+        StartLevel(_currentGameLevel);
+        rulesImage.gameObject.SetActive(false);
+    }
+
 
     public void StartLevel(int level){
         _saveablesObjects.WriteAllDataToContainer();
-        _saveLoadController.SaveDataContainerToFile(_dataContainer);
+        _saveLoadController.SaveDataContainer(_dataContainer);
         theKing.Refresh();
         switch (level){
+            case 0:
+                rulesImage.gameObject.SetActive(true);
+                break;
             case 1:
                 StartHumanWave(level);
                 weaponsFactory.TryCreateWeapon();

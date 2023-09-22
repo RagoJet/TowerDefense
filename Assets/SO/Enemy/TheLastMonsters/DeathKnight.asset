@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DeathKnight
   m_EditorClassIdentifier: 
   enemyData:
-    levelOfUnit: 23
+    levelOfUnit: 5
     levelOfRace: 4
   damage: 9
   maxHealth: 7
-  gold: 9
+  gold: 5
   enemyPrefab: {fileID: -1336912989419396575, guid: d29165d351ad87b4e825f43bc6f1b3ba,
     type: 3}
