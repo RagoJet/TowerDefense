@@ -102,6 +102,7 @@ public class Enemy : MonoBehaviour{
         if (_currentHealth <= 0 || _state == StateEnemy.Death) return;
         _currentHealth -= countOfDamage;
         if (_currentHealth <= 0){
+            AudioManager.Instance.PlayDeadEnemySound();
             PlayDeathState();
         }
     }

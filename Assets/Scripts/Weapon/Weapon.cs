@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour{
     private Cell _cell;
 
     private WeaponDescription _description;
-    private WeaponMode _weaponMode;
+    public WeaponMode weaponMode;
 
 
     private List<Enemy> _listOfEnemies;
@@ -23,27 +23,33 @@ public class Weapon : MonoBehaviour{
 
     private float _timeFromLastAttack;
 
+    private GameManager _gameManager;
 
-    public void Construct(WeaponDescription description, WeaponsFactory factory, Cell cell, List<Enemy> list){
-        _weaponMode = WeaponMode.On;
+    public void Construct(WeaponDescription description, WeaponsFactory factory, Cell cell, List<Enemy> list,
+        GameManager gameManager){
+        weaponMode = WeaponMode.On;
         _description = description;
         _factory = factory;
         OccupyTheCell(cell);
         _listOfEnemies = list;
+        _gameManager = gameManager;
     }
 
     public void Construct(Cell cell){
-        _weaponMode = WeaponMode.On;
+        weaponMode = WeaponMode.On;
         OccupyTheCell(cell);
     }
 
+
     private void Update(){
-        switch (_weaponMode){
+        switch (weaponMode){
             case WeaponMode.Off:
                 break;
             case WeaponMode.On:
-                if (TryChooseATarget()){
-                    Attack();
+                if (_gameManager.state == GameState.Playing){
+                    if (TryChooseATarget()){
+                        Attack();
+                    }
                 }
 
                 break;
@@ -84,7 +90,7 @@ public class Weapon : MonoBehaviour{
     }
 
     private void OnMouseDown(){
-        _weaponMode = WeaponMode.Off;
+        weaponMode = WeaponMode.Off;
     }
 
     private void OnMouseDrag(){
@@ -102,7 +108,7 @@ public class Weapon : MonoBehaviour{
     }
 
     private void OnMouseUp(){
-        _weaponMode = WeaponMode.On;
+        weaponMode = WeaponMode.On;
         Ray ray = new Ray();
         ray.origin = transform.position;
         ray.direction = Vector3.down;

@@ -5,6 +5,7 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
     private Cells _cells;
     [SerializeField] private int maxLevelWeapons = 24;
 
+
     private readonly LazyWeaponPool _lazyWeaponPool = new LazyWeaponPool();
 
 
@@ -13,10 +14,13 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
     private int _levelShopWeapon;
     private int _maxLevelOfCreatedWeapon;
 
-    public void Construct(WeaponDescriptions weaponDescriptions, Cells cells){
+    private GameManager _gameManager;
+
+    public void Construct(WeaponDescriptions weaponDescriptions, Cells cells, GameManager gameManager){
         this.weaponDescriptions = weaponDescriptions;
         _cells = cells;
         _lazyWeaponPool.Init();
+        _gameManager = gameManager;
     }
 
     private void HideWeapon(Weapon weapon){
@@ -40,7 +44,7 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
             int index = levelWeapon - 1;
             weapon = Instantiate(weaponDescriptions.ListWeapons[index].weaponPrefab);
             weapon.Construct(weaponDescriptions.ListWeapons[index], this, cell,
-                GetComponent<EnemiesFactory>().ListOfAliveEnemies);
+                GetComponent<EnemiesFactory>().ListOfAliveEnemies, _gameManager);
         }
         else{
             weapon.Construct(cell);

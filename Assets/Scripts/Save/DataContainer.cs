@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 [Serializable]
 public class DataContainer{
-    public int currentLevel = 0;
+    public int currentLevel = 1;
 
     public List<CellsInformation> cellsInformation = new List<CellsInformation>();
 

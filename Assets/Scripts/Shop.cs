@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 
 public class Shop : MonoBehaviour, ISaveable{
@@ -19,7 +20,28 @@ public class Shop : MonoBehaviour, ISaveable{
 
     private DataContainer _dataContainer;
 
-    public void Construct(WeaponsFactory weaponsFactory, King king){
+    private string priceWeaponString = "";
+    private string priceHealthString = "";
+    private string goldString = "";
+    [SerializeField] private TextMeshProUGUI restartText;
+    [SerializeField] private TextMeshProUGUI adsText;
+
+    public void Construct(WeaponsFactory weaponsFactory, King king, string language){
+        if (language.Equals("en")){
+            priceHealthString = "Price of health: ";
+            priceWeaponString = "Price of weapon: ";
+            goldString = "Gold: ";
+            restartText.text = "Restart";
+            adsText.text = "Watch ads for get gold";
+        }
+        else if (language.Equals("ru")){
+            priceHealthString = "Цена здоровья: ";
+            priceWeaponString = "Цена оружия: ";
+            goldString = "Золото: ";
+            restartText.text = "Рестарт";
+            adsText.text = "Просмотр рекламы для золота";
+        }
+
         this.weaponsFactory = weaponsFactory;
         this.king = king;
         UpdateGoldUI();
@@ -53,23 +75,28 @@ public class Shop : MonoBehaviour, ISaveable{
         UpdateGoldForAdsUI();
     }
 
+    [DllImport("__Internal")]
+    public static extern void WatchAdsExtern();
 
     public void TryWatchAds(){
-        // watch ads
+        WatchAdsExtern();
+    }
+
+    public void AddGold(){
         _gold += _goldForAds;
         UpdateGoldUI();
     }
 
     private void UpdatePriceHealthUI(){
-        priceHealthText.text = "Цена здоровья: " + _priceHealth;
+        priceHealthText.text = priceHealthString + _priceHealth;
     }
 
     private void UpdatePriceWeaponUI(){
-        priceWeaponText.text = "Цена оружия: " + _priceWeapon;
+        priceWeaponText.text = priceWeaponString + _priceWeapon;
     }
 
     private void UpdateGoldUI(){
-        goldText.text = "Золото:\n" + _gold;
+        goldText.text = goldString + _gold;
     }
 
     public void AddGoldFromEnemy(int newGold){

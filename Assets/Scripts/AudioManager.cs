@@ -3,6 +3,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour{
     private AudioSource _audioSource;
     [SerializeField] private AudioClip[] audioClips;
+    [SerializeField] private AudioClip dieClip;
+    [SerializeField] private AudioClip startLevelClip;
+    [SerializeField] private AudioClip deathEnemyClip;
 
     public static AudioManager Instance{ get; private set; }
 
@@ -32,5 +35,17 @@ public class AudioManager : MonoBehaviour{
                 _audioSource.PlayOneShot(audioClips[5]);
                 break;
         }
+    }
+
+    public void PlayLoseGameSound(){
+        _audioSource.PlayOneShot(dieClip);
+    }
+
+    public void PlayStartLevelSound(){
+        _audioSource.PlayOneShot(startLevelClip);
+    }
+
+    public void PlayDeadEnemySound(){
+        _audioSource.PlayOneShot(deathEnemyClip);
     }
 }

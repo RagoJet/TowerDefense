@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -40,14 +42,41 @@ public class GameManager : MonoBehaviour, ISaveable{
     [SerializeField] private ParticleSystem WaveFXUndead;
     [SerializeField] private ParticleSystem WaveFXOrc;
 
-    [SerializeField] private Image rulesImage;
+    [DllImport("__Internal")]
+    private static extern void LoadJSONFromYAExtern();
+
+    [DllImport("__Internal")]
+    private static extern void SaveJSONToYAExtern(String date);
+
+    [DllImport("__Internal")]
+    private static extern void RateGameExtern();
+
+    [DllImport("__Internal")]
+    private static extern string GetLangExtern();
+
+    [DllImport("__Internal")]
+    private static extern void ShowAdvExtern();
+
 
     private void Awake(){
+        LoadJSONFromYAExtern();
+    }
+
+    public void Pause(){
+        Time.timeScale = 0;
+    }
+
+    public void UnPause(){
+        Time.timeScale = 1f;
+    }
+
+
+    private void Init(string json){
         _saveLoadController = new SaveLoadController();
-        _dataContainer = _saveLoadController.GetDataContainer();
+        _dataContainer = _saveLoadController.GetDataContainerFromJSON(json);
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);
 
-        weaponsFactory.Construct(weaponDescriptions, cells);
+        weaponsFactory.Construct(weaponDescriptions, cells, this);
         enemiesFactory.Construct(enemyDescriptions, shop, theKing, theGate, this);
 
 
@@ -55,7 +84,7 @@ public class GameManager : MonoBehaviour, ISaveable{
 
         theKing.Construct(this);
         kingHealthUI.Construct(theKing);
-        shop.Construct(weaponsFactory, theKing);
+        shop.Construct(weaponsFactory, theKing, GetLangExtern());
 
         state = GameState.Playing;
         restartButton.image.color = Color.gray;
@@ -64,43 +93,37 @@ public class GameManager : MonoBehaviour, ISaveable{
 
 
     public void StopGame(){
+        AudioManager.Instance.PlayLoseGameSound();
         state = GameState.Stop;
         restartButton.image.color = Color.white;
         restartButton.onClick.AddListener(RestartLevel);
     }
 
-    public void IGotIt(){
-        _currentGameLevel++;
-        StartLevel(_currentGameLevel);
-        rulesImage.gameObject.SetActive(false);
-    }
-
 
     public void StartLevel(int level){
+        AudioManager.Instance.PlayStartLevelSound();
         _saveablesObjects.WriteAllDataToContainer();
-        _saveLoadController.SaveDataContainer(_dataContainer);
+        SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
         theKing.Refresh();
         switch (level){
-            case 0:
-                rulesImage.gameObject.SetActive(true);
-                break;
             case 1:
                 StartHumanWave(level);
                 weaponsFactory.TryCreateWeapon();
                 break;
-            case < 10:
+            case < 11:
                 StartHumanWave(level);
                 break;
-            case < 20:
+            case < 21:
                 StartElfWave(level);
                 break;
-            case < 30:
+            case < 31:
                 StartUndeadWave(level);
                 break;
-            case < 40:
+            case < 41:
                 StartOrcWave(level);
                 break;
             default:
+                RateGameExtern();
                 StartLastMonstersWave(level);
                 break;
         }
@@ -180,6 +203,7 @@ public class GameManager : MonoBehaviour, ISaveable{
             countOfAliveEnemies--;
             if (countOfAliveEnemies == 0){
                 _currentGameLevel++;
+                ShowAdvExtern();
                 StartLevel(_currentGameLevel);
             }
         }
@@ -187,6 +211,7 @@ public class GameManager : MonoBehaviour, ISaveable{
 
     public void RestartLevel(){
         if (state == GameState.Stop){
+            ShowAdvExtern();
             restartButton.image.color = Color.gray;
             restartButton.onClick.RemoveListener(RestartLevel);
             StartCoroutine(RestartLevelCoroutine());
