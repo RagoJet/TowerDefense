@@ -26,20 +26,26 @@ public class Shop : MonoBehaviour, ISaveable{
     [SerializeField] private TextMeshProUGUI restartText;
     [SerializeField] private TextMeshProUGUI adsText;
 
+    public static Shop Instance{ get; private set; }
+
+    private void Awake(){
+        Instance = this;
+    }
+
     public void Construct(WeaponsFactory weaponsFactory, King king, string language){
         if (language.Equals("en")){
             priceHealthString = "Price of health: ";
             priceWeaponString = "Price of weapon: ";
             goldString = "Gold: ";
             restartText.text = "Restart";
-            adsText.text = "Watch ads for get gold";
+            adsText.text = "Watch ad";
         }
         else if (language.Equals("ru")){
             priceHealthString = "Цена здоровья: ";
             priceWeaponString = "Цена оружия: ";
             goldString = "Золото: ";
             restartText.text = "Рестарт";
-            adsText.text = "Просмотр рекламы для золота";
+            adsText.text = "Смотреть рекламу";
         }
 
         this.weaponsFactory = weaponsFactory;
@@ -52,7 +58,7 @@ public class Shop : MonoBehaviour, ISaveable{
 
     private void UpdateGoldForAdsUI(){
         _goldForAds = (int) (_priceHealth * 2.5f);
-        goldForAdsText.text = _goldForAds.ToString();
+        goldForAdsText.text = "+" + _goldForAds;
     }
 
     public void TryBuyWeapon(){
@@ -79,10 +85,11 @@ public class Shop : MonoBehaviour, ISaveable{
     public static extern void WatchAdsExtern();
 
     public void TryWatchAds(){
-        WatchAdsExtern();
+        // WatchAdsExtern();
+        AddGoldFromAd();
     }
 
-    public void AddGold(){
+    public void AddGoldFromAd(){
         _gold += _goldForAds;
         UpdateGoldUI();
     }

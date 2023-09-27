@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -26,6 +27,9 @@ public class GameManager : MonoBehaviour, ISaveable{
 
     [SerializeField] private Button restartButton;
     public GameState state = GameState.Stop;
+
+    [SerializeField] private TextMeshProUGUI currentLevelText;
+    private string _currentLevelLang;
 
     private int _currentGameLevel = 1;
 
@@ -58,8 +62,9 @@ public class GameManager : MonoBehaviour, ISaveable{
     private static extern void ShowAdvExtern();
 
 
-    private void Awake(){
-        LoadJSONFromYAExtern();
+    private void Start(){
+        // LoadJSONFromYAExtern();
+        Init(null);
     }
 
     public void Pause(){
@@ -77,14 +82,21 @@ public class GameManager : MonoBehaviour, ISaveable{
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);
 
         weaponsFactory.Construct(weaponDescriptions, cells, this);
-        enemiesFactory.Construct(enemyDescriptions, shop, theKing, theGate, this);
+        enemiesFactory.Construct(enemyDescriptions, theKing, theGate, this);
 
 
         _saveablesObjects.LoadAllDataFromContainer();
 
         theKing.Construct(this);
         kingHealthUI.Construct(theKing);
-        shop.Construct(weaponsFactory, theKing, GetLangExtern());
+        string lang = "ru" /*GetLangExtern()*/;
+        shop.Construct(weaponsFactory, theKing, lang);
+        if (lang.Equals("ru")){
+            _currentLevelLang = "Текущий уровень: ";
+        }
+        else if (lang.Equals("en")){
+            _currentLevelLang = "Current level: ";
+        }
 
         state = GameState.Playing;
         restartButton.image.color = Color.gray;
@@ -101,9 +113,10 @@ public class GameManager : MonoBehaviour, ISaveable{
 
 
     public void StartLevel(int level){
+        currentLevelText.text = _currentLevelLang + _currentGameLevel;
         AudioManager.Instance.PlayStartLevelSound();
-        _saveablesObjects.WriteAllDataToContainer();
-        SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
+        // _saveablesObjects.WriteAllDataToContainer();
+        // SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
         theKing.Refresh();
         switch (level){
             case 1:
@@ -203,7 +216,7 @@ public class GameManager : MonoBehaviour, ISaveable{
             countOfAliveEnemies--;
             if (countOfAliveEnemies == 0){
                 _currentGameLevel++;
-                ShowAdvExtern();
+                // ShowAdvExtern();
                 StartLevel(_currentGameLevel);
             }
         }
@@ -211,7 +224,7 @@ public class GameManager : MonoBehaviour, ISaveable{
 
     public void RestartLevel(){
         if (state == GameState.Stop){
-            ShowAdvExtern();
+            // ShowAdvExtern();
             restartButton.image.color = Color.gray;
             restartButton.onClick.RemoveListener(RestartLevel);
             StartCoroutine(RestartLevelCoroutine());

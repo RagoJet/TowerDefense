@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemiesFactory : MonoBehaviour{
     private EnemyDescriptions enemyDescriptions;
-    private Shop shop;
     private King theKing;
     private GameObject theGate;
     private GameManager gameManager;
@@ -13,10 +12,8 @@ public class EnemiesFactory : MonoBehaviour{
     private readonly List<Enemy> _listOfAliveEnemies = new();
     public List<Enemy> ListOfAliveEnemies => _listOfAliveEnemies;
 
-    public void Construct(EnemyDescriptions enemyDescriptions, Shop shop, King king, GameObject gate,
-        GameManager gameManager){
+    public void Construct(EnemyDescriptions enemyDescriptions, King king, GameObject gate, GameManager gameManager){
         this.enemyDescriptions = enemyDescriptions;
-        this.shop = shop;
         this.theKing = king;
         this.theGate = gate;
         this.gameManager = gameManager;
@@ -32,16 +29,7 @@ public class EnemiesFactory : MonoBehaviour{
         _listOfAliveEnemies.Clear();
     }
 
-    private void HideEnemy(Enemy enemy, bool willBeGold){
-        if (willBeGold){
-            if (enemy.GetEnemyData().levelOfRace == 4){
-                shop.AddGoldFromEnemy(enemy.GetGold() * gameManager.CurrentGameLevel);
-            }
-            else{
-                shop.AddGoldFromEnemy(enemy.GetGold());
-            }
-        }
-
+    private void HideEnemy(Enemy enemy){
         enemy.OnDie -= HideEnemy;
         _listOfAliveEnemies.Remove(enemy);
         gameManager.OnDieEnemy();

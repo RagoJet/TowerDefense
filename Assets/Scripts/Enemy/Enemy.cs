@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour{
 
     private int _currentHealth;
 
-    public event Action<Enemy, bool> OnDie;
+    public event Action<Enemy> OnDie;
 
     private float _timeFromLastCheck;
 
@@ -102,7 +102,17 @@ public class Enemy : MonoBehaviour{
         if (_currentHealth <= 0 || _state == StateEnemy.Death) return;
         _currentHealth -= countOfDamage;
         if (_currentHealth <= 0){
-            AudioManager.Instance.PlayDeadEnemySound();
+            if (_target.GetState() == KingState.Idle){
+                if (GetEnemyData().levelOfRace == 4){
+                    Shop.Instance.AddGoldFromEnemy(GetGold() * _levelOfGame);
+                }
+                else{
+                    Shop.Instance.AddGoldFromEnemy(GetGold());
+                }
+
+                AudioManager.Instance.PlayGoldDeathEnemySound();
+            }
+
             PlayDeathState();
         }
     }
@@ -116,9 +126,8 @@ public class Enemy : MonoBehaviour{
     }
 
     IEnumerator LastTimeOfLiveEnemy(){
-        var willBeGold = (_target.GetState() != KingState.Death);
         yield return new WaitForSeconds(1.8f);
-        OnDie?.Invoke(this, willBeGold);
+        OnDie?.Invoke(this);
     }
 
 

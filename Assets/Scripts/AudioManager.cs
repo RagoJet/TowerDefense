@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour{
         _audioSource.PlayOneShot(startLevelClip);
     }
 
-    public void PlayDeadEnemySound(){
+    public void PlayGoldDeathEnemySound(){
         _audioSource.PlayOneShot(deathEnemyClip);
     }
 }
