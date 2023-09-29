@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 9
   damage: 15
-  attackDelay: 1.2
+  attackDelay: 1.4
   weaponPrefab: {fileID: 6822533048873178572, guid: 41fce2e91115f37438ce1c2e3aac7317,
     type: 3}

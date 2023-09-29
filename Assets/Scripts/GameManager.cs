@@ -12,6 +12,8 @@ public enum GameState{
 }
 
 public class GameManager : MonoBehaviour, ISaveable{
+    [SerializeField] private Texture2D cursorTexture;
+
     [SerializeField] private WeaponsFactory weaponsFactory;
     [SerializeField] private WeaponDescriptions weaponDescriptions;
     [SerializeField] private EnemiesFactory enemiesFactory;
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour, ISaveable{
 
 
     private void Init(string json){
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         _saveLoadController = new SaveLoadController();
         _dataContainer = _saveLoadController.GetDataContainerFromJSON(json);
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);
@@ -89,13 +92,14 @@ public class GameManager : MonoBehaviour, ISaveable{
 
         theKing.Construct(this);
         kingHealthUI.Construct(theKing);
-        string lang = "ru" /*GetLangExtern()*/;
+        // string lang = GetLangExtern();
+        string lang = "en";
         shop.Construct(weaponsFactory, theKing, lang);
         if (lang.Equals("ru")){
-            _currentLevelLang = "Текущий уровень: ";
+            _currentLevelLang = "Уровень: ";
         }
         else if (lang.Equals("en")){
-            _currentLevelLang = "Current level: ";
+            _currentLevelLang = "Level: ";
         }
 
         state = GameState.Playing;
@@ -115,7 +119,7 @@ public class GameManager : MonoBehaviour, ISaveable{
     public void StartLevel(int level){
         currentLevelText.text = _currentLevelLang + _currentGameLevel;
         AudioManager.Instance.PlayStartLevelSound();
-        // _saveablesObjects.WriteAllDataToContainer();
+        _saveablesObjects.WriteAllDataToContainer();
         // SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
         theKing.Refresh();
         switch (level){
@@ -158,7 +162,7 @@ public class GameManager : MonoBehaviour, ISaveable{
         countOfAliveEnemies = (int) (level * 0.4f);
         EnemyData elfEnemyData = new EnemyData(1, 0);
         int levelOfUnit = Mathf.Clamp(level - 10, 0, 7);
-        for (int i = 0; i < level * 0.4; i++){
+        for (int i = 0; i < countOfAliveEnemies; i++){
             elfEnemyData.levelOfUnit = Random.Range(0, levelOfUnit);
             enemiesFactory.CreateAndDirectEnemy(elfEnemyData);
         }

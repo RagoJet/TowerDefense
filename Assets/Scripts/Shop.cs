@@ -20,9 +20,6 @@ public class Shop : MonoBehaviour, ISaveable{
 
     private DataContainer _dataContainer;
 
-    private string priceWeaponString = "";
-    private string priceHealthString = "";
-    private string goldString = "";
     [SerializeField] private TextMeshProUGUI restartText;
     [SerializeField] private TextMeshProUGUI adsText;
 
@@ -34,16 +31,10 @@ public class Shop : MonoBehaviour, ISaveable{
 
     public void Construct(WeaponsFactory weaponsFactory, King king, string language){
         if (language.Equals("en")){
-            priceHealthString = "Price of health: ";
-            priceWeaponString = "Price of weapon: ";
-            goldString = "Gold: ";
             restartText.text = "Restart";
             adsText.text = "Watch ad";
         }
         else if (language.Equals("ru")){
-            priceHealthString = "Цена здоровья: ";
-            priceWeaponString = "Цена оружия: ";
-            goldString = "Золото: ";
             restartText.text = "Рестарт";
             adsText.text = "Смотреть рекламу";
         }
@@ -95,20 +86,21 @@ public class Shop : MonoBehaviour, ISaveable{
     }
 
     private void UpdatePriceHealthUI(){
-        priceHealthText.text = priceHealthString + _priceHealth;
+        priceHealthText.text = _priceHealth.ToString();
     }
 
     private void UpdatePriceWeaponUI(){
-        priceWeaponText.text = priceWeaponString + _priceWeapon;
+        priceWeaponText.text = _priceWeapon.ToString();
     }
 
     private void UpdateGoldUI(){
-        goldText.text = goldString + _gold;
+        goldText.text = _gold.ToString();
     }
 
     public void AddGoldFromEnemy(int newGold){
         _gold += newGold;
         UpdateGoldUI();
+        AudioManager.Instance.PlayGoldDeathEnemySound();
     }
 
     public void WriteDataToContainer(){

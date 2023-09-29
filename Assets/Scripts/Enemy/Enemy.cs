@@ -109,8 +109,6 @@ public class Enemy : MonoBehaviour{
                 else{
                     Shop.Instance.AddGoldFromEnemy(GetGold());
                 }
-
-                AudioManager.Instance.PlayGoldDeathEnemySound();
             }
 
             PlayDeathState();
@@ -126,7 +124,7 @@ public class Enemy : MonoBehaviour{
     }
 
     IEnumerator LastTimeOfLiveEnemy(){
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(1.7f);
         OnDie?.Invoke(this);
     }
 

@@ -25,18 +25,22 @@ public class Weapon : MonoBehaviour{
 
     private GameManager _gameManager;
 
+    private Tween _tween;
+
     public void Construct(WeaponDescription description, WeaponsFactory factory, Cell cell, List<Enemy> list,
         GameManager gameManager){
-        weaponMode = WeaponMode.On;
         _description = description;
         _factory = factory;
-        OccupyTheCell(cell);
         _listOfEnemies = list;
         _gameManager = gameManager;
+        transform.position = new Vector3(cell.transform.position.x, cell.transform.position.y + 15f,
+            cell.transform.position.z);
+        OccupyTheCell(cell);
     }
 
     public void Construct(Cell cell){
-        weaponMode = WeaponMode.On;
+        transform.position = new Vector3(cell.transform.position.x, cell.transform.position.y + 15f,
+            cell.transform.position.z);
         OccupyTheCell(cell);
     }
 
@@ -76,7 +80,9 @@ public class Weapon : MonoBehaviour{
 
     private void Attack(){
         if (_aimTarget != null && _aimTarget.GetState() != StateEnemy.Death){
-            transform.LookAt(_aimTarget.transform, Vector3.up);
+            Vector3 direction = _aimTarget.transform.position - transform.position;
+            direction.y = 0;
+            transform.forward = direction;
             if (Time.time - _timeFromLastAttack >= _description.attackDelay){
                 _aimTarget.TakeDamage(_description.damage);
                 transform.DOShakeScale(_description.attackDelay * 0.7f, 0.1f);
@@ -91,6 +97,7 @@ public class Weapon : MonoBehaviour{
 
     private void OnMouseDown(){
         weaponMode = WeaponMode.Off;
+        _tween = transform.DOMoveY(_cell.transform.position.y + 4f, 0.5f);
     }
 
     private void OnMouseDrag(){
@@ -101,14 +108,13 @@ public class Weapon : MonoBehaviour{
         int islandLayerMask = 1 << LayerMask.NameToLayer("Island");
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, islandLayerMask)){
             if (hit.collider.TryGetComponent(out Island island)){
-                Vector3 newPosition = new Vector3(hit.point.x, island.transform.position.y + 5f, hit.point.z);
+                Vector3 newPosition = new Vector3(hit.point.x, transform.position.y, hit.point.z);
                 gameObject.transform.position = newPosition;
             }
         }
     }
 
     private void OnMouseUp(){
-        weaponMode = WeaponMode.On;
         Ray ray = new Ray();
         ray.origin = transform.position;
         ray.direction = Vector3.down;
@@ -140,7 +146,8 @@ public class Weapon : MonoBehaviour{
     }
 
     private void ReturnPositionToCell(){
-        transform.position = _cell.GetPosition();
+        _tween?.Kill();
+        transform.DOMove(_cell.GetPosition(), 0.2f).OnComplete(() => { weaponMode = WeaponMode.On; });
     }
 
     private void OccupyTheCell(Cell cell){

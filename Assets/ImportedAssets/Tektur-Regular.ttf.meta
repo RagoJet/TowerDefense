@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 97d7c4273ea59464493d3cbbf0ce1234
+guid: 904b6cc4762ca4945a2c8dc69d9e48b8
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Ostrovsky
+  - Tektur
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

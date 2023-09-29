@@ -61,7 +61,7 @@ mergeInto(LibraryManager.library, {
                 },
                 onRewarded: () => {
                     console.log('Rewarded!');
-                    myGameInstance.SendMessage('Shop', 'AddGold');
+                    myGameInstance.SendMessage('Shop', 'AddGoldFromAd');
                 },
                 onClose: () => {
                     myGameInstance.SendMessage('GameManager', 'UnPause');
