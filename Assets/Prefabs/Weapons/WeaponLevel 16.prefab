@@ -302,8 +302,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 1.5, z: 1.25}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1.6, y: 2.1, z: 1.6}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &665815853864437703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +320,7 @@ MonoBehaviour:
   - {fileID: 73073580813281616}
   - {fileID: 1590524043210903527}
   - {fileID: 2455195392329340875}
+  weaponMode: 0
 --- !u!1001 &5105914937477492816
 PrefabInstance:
   m_ObjectHideFlags: 0

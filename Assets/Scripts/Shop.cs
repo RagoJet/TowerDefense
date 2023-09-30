@@ -47,10 +47,6 @@ public class Shop : MonoBehaviour, ISaveable{
         UpdateGoldForAdsUI();
     }
 
-    private void UpdateGoldForAdsUI(){
-        _goldForAds = (int) (_priceHealth * 2.5f);
-        goldForAdsText.text = "+" + _goldForAds;
-    }
 
     public void TryBuyWeapon(){
         if (_gold < _priceWeapon) return;
@@ -83,6 +79,11 @@ public class Shop : MonoBehaviour, ISaveable{
     public void AddGoldFromAd(){
         _gold += _goldForAds;
         UpdateGoldUI();
+    }
+
+    private void UpdateGoldForAdsUI(){
+        _goldForAds = (int) (_priceHealth * 2.5f);
+        goldForAdsText.text = "+" + _goldForAds;
     }
 
     private void UpdatePriceHealthUI(){

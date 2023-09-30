@@ -12,8 +12,6 @@ public enum GameState{
 }
 
 public class GameManager : MonoBehaviour, ISaveable{
-    [SerializeField] private Texture2D cursorTexture;
-
     [SerializeField] private WeaponsFactory weaponsFactory;
     [SerializeField] private WeaponDescriptions weaponDescriptions;
     [SerializeField] private EnemiesFactory enemiesFactory;
@@ -79,7 +77,6 @@ public class GameManager : MonoBehaviour, ISaveable{
 
 
     private void Init(string json){
-        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         _saveLoadController = new SaveLoadController();
         _dataContainer = _saveLoadController.GetDataContainerFromJSON(json);
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);

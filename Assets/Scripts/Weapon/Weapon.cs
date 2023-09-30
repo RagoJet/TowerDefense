@@ -26,6 +26,9 @@ public class Weapon : MonoBehaviour{
     private GameManager _gameManager;
 
     private Tween _tween;
+    private LineRenderWeapon _lineRendererWeapon;
+
+    int _islandLayerMask;
 
     public void Construct(WeaponDescription description, WeaponsFactory factory, Cell cell, List<Enemy> list,
         GameManager gameManager){
@@ -36,6 +39,8 @@ public class Weapon : MonoBehaviour{
         transform.position = new Vector3(cell.transform.position.x, cell.transform.position.y + 15f,
             cell.transform.position.z);
         OccupyTheCell(cell);
+        _lineRendererWeapon = LineRenderWeapon.Instance;
+        _islandLayerMask = 1 << LayerMask.NameToLayer("Island");
     }
 
     public void Construct(Cell cell){
@@ -98,23 +103,27 @@ public class Weapon : MonoBehaviour{
     private void OnMouseDown(){
         weaponMode = WeaponMode.Off;
         _tween = transform.DOMoveY(_cell.transform.position.y + 4f, 0.5f);
+        _lineRendererWeapon.gameObject.SetActive(true);
+        _lineRendererWeapon.transform.position = new Vector3(transform.position.x, transform.position.y - 3.5f,
+            transform.position.z);
     }
 
     private void OnMouseDrag(){
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-
-        int islandLayerMask = 1 << LayerMask.NameToLayer("Island");
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, islandLayerMask)){
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, _islandLayerMask)){
             if (hit.collider.TryGetComponent(out Island island)){
                 Vector3 newPosition = new Vector3(hit.point.x, transform.position.y, hit.point.z);
                 gameObject.transform.position = newPosition;
+                _lineRendererWeapon.transform.position = new Vector3(transform.position.x, transform.position.y - 3.5f,
+                    transform.position.z);
             }
         }
     }
 
     private void OnMouseUp(){
+        _lineRendererWeapon.gameObject.SetActive(false);
         Ray ray = new Ray();
         ray.origin = transform.position;
         ray.direction = Vector3.down;
