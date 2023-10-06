@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public enum StateEnemy{
@@ -27,6 +29,8 @@ public class Enemy : MonoBehaviour{
 
     private int _levelOfGame;
 
+    [SerializeField] private Image currentHealthImage;
+
     private void Awake(){
         _agent = GetComponent<NavMeshAgent>();
         _animations = GetComponent<EnemyAnimations>();
@@ -38,6 +42,7 @@ public class Enemy : MonoBehaviour{
         transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
         _target = target;
         _currentHealth = _description.maxHealth * _levelOfGame;
+        UpdateHealthUI(_description.enemyData.levelOfRace);
         PlayRunState();
     }
 
@@ -47,13 +52,28 @@ public class Enemy : MonoBehaviour{
         transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
         _target = target;
         _currentHealth = _description.maxHealth;
+        UpdateHealthUI(_description.enemyData.levelOfRace);
         PlayRunState();
     }
 
     public void Construct(Transform theGateTransform){
         transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
         _currentHealth = _description.maxHealth;
+        UpdateHealthUI(_description.enemyData.levelOfRace);
         PlayRunState();
+    }
+
+    private void UpdateHealthUI(int levelOfRace){
+        switch (levelOfRace){
+            case <4:
+                currentHealthImage.DOFillAmount((float) _currentHealth / _description.maxHealth, 0.5f)
+                    .SetEase(Ease.OutExpo);
+                break;
+            default:
+                currentHealthImage.DOFillAmount((float) _currentHealth / (_description.maxHealth * _levelOfGame), 0.5f)
+                    .SetEase(Ease.OutExpo);
+                break;
+        }
     }
 
     private void Update(){
@@ -101,6 +121,7 @@ public class Enemy : MonoBehaviour{
     public void TakeDamage(int countOfDamage){
         if (_currentHealth <= 0 || _state == StateEnemy.Death) return;
         _currentHealth -= countOfDamage;
+        UpdateHealthUI(_description.enemyData.levelOfRace);
         if (_currentHealth <= 0){
             if (_target.GetState() == KingState.Idle){
                 if (GetEnemyData().levelOfRace == 4){

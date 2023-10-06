@@ -72,8 +72,7 @@ public class Shop : MonoBehaviour, ISaveable{
     public static extern void WatchAdsExtern();
 
     public void TryWatchAds(){
-        // WatchAdsExtern();
-        AddGoldFromAd();
+        WatchAdsExtern();
     }
 
     public void AddGoldFromAd(){
@@ -82,7 +81,7 @@ public class Shop : MonoBehaviour, ISaveable{
     }
 
     private void UpdateGoldForAdsUI(){
-        _goldForAds = (int) (_priceHealth * 2.5f);
+        _goldForAds = _priceHealth * 3;
         goldForAdsText.text = "+" + _goldForAds;
     }
 

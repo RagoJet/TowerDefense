@@ -14,8 +14,8 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Ragim
   productName: FuriousTD
-  defaultCursor: {fileID: 2800000, guid: 0b723bf2ddcf1bd458f262396edd5abb, type: 3}
-  cursorHotspot: {x: 40, y: 40}
+  defaultCursor: {fileID: 2800000, guid: e1631b9b226557f49a48eb21f60622e8, type: 3}
+  cursorHotspot: {x: 6, y: 7}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1

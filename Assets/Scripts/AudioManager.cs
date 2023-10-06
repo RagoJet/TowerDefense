@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour{
         Instance = this;
     }
 
+    public AudioSource AudioSource => _audioSource;
+
     public void PlayShotSound(int levelWeapon){
         switch (levelWeapon){
             case <5:

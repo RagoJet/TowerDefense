@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponDescription 21
   m_EditorClassIdentifier: 
   level: 21
-  damage: 90
+  damage: 75
   attackDelay: 0.6
   weaponPrefab: {fileID: 7946637989949922458, guid: 92b41966122431b4eb3a87990081437f,
     type: 3}

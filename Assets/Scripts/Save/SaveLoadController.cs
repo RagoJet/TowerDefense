@@ -9,13 +9,6 @@ public class SaveLoadController{
     }
 
     public DataContainer GetDataContainerFromJSON(String json){
-        // if (File.Exists(_filePath)){
-        //     string jsonFile = File.ReadAllText(_filePath);
-        //     return JsonUtility.FromJson<DataContainer>(jsonFile);
-        // }
-        // else{
-        //     return new DataContainer();
-        // }
         if (json == null){
             return new DataContainer();
         }
@@ -23,4 +16,20 @@ public class SaveLoadController{
             return JsonUtility.FromJson<DataContainer>(json);
         }
     }
+
+
+    // public void WRITEJSONDATACONTAINERTOFILE(DataContainer dataContainer){
+    //     string json = JsonUtility.ToJson(dataContainer);
+    //     File.WriteAllText(_filePath, json);
+    // }
+
+    // public DataContainer GETDATACONTAINERFROMJSONEDITOR(){
+    //     if (File.Exists(_filePath)){
+    //         string jsonFile = File.ReadAllText(_filePath);
+    //         return JsonUtility.FromJson<DataContainer>(jsonFile);
+    //     }
+    //     else{
+    //         return new DataContainer();
+    //     }
+    // }
 }

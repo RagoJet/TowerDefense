@@ -63,15 +63,16 @@ public class GameManager : MonoBehaviour, ISaveable{
 
 
     private void Start(){
-        // LoadJSONFromYAExtern();
-        Init(null);
+        LoadJSONFromYAExtern();
     }
 
     public void Pause(){
+        AudioManager.Instance.AudioSource.Pause();
         Time.timeScale = 0;
     }
 
     public void UnPause(){
+        AudioManager.Instance.AudioSource.UnPause();
         Time.timeScale = 1f;
     }
 
@@ -80,17 +81,13 @@ public class GameManager : MonoBehaviour, ISaveable{
         _saveLoadController = new SaveLoadController();
         _dataContainer = _saveLoadController.GetDataContainerFromJSON(json);
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);
-
         weaponsFactory.Construct(weaponDescriptions, cells, this);
         enemiesFactory.Construct(enemyDescriptions, theKing, theGate, this);
-
-
         _saveablesObjects.LoadAllDataFromContainer();
 
         theKing.Construct(this);
         kingHealthUI.Construct(theKing);
-        // string lang = GetLangExtern();
-        string lang = "en";
+        string lang = GetLangExtern();
         shop.Construct(weaponsFactory, theKing, lang);
         if (lang.Equals("ru")){
             _currentLevelLang = "Уровень: ";
@@ -116,8 +113,6 @@ public class GameManager : MonoBehaviour, ISaveable{
     public void StartLevel(int level){
         currentLevelText.text = _currentLevelLang + _currentGameLevel;
         AudioManager.Instance.PlayStartLevelSound();
-        _saveablesObjects.WriteAllDataToContainer();
-        // SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
         theKing.Refresh();
         switch (level){
             case 1:
@@ -128,6 +123,7 @@ public class GameManager : MonoBehaviour, ISaveable{
                 StartHumanWave(level);
                 break;
             case < 21:
+                RateGameExtern();
                 StartElfWave(level);
                 break;
             case < 31:
@@ -137,7 +133,6 @@ public class GameManager : MonoBehaviour, ISaveable{
                 StartOrcWave(level);
                 break;
             default:
-                RateGameExtern();
                 StartLastMonstersWave(level);
                 break;
         }
@@ -217,7 +212,10 @@ public class GameManager : MonoBehaviour, ISaveable{
             countOfAliveEnemies--;
             if (countOfAliveEnemies == 0){
                 _currentGameLevel++;
-                // ShowAdvExtern();
+                
+                _saveablesObjects.WriteAllDataToContainer();
+                SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
+                
                 StartLevel(_currentGameLevel);
             }
         }
@@ -225,7 +223,10 @@ public class GameManager : MonoBehaviour, ISaveable{
 
     public void RestartLevel(){
         if (state == GameState.Stop){
-            // ShowAdvExtern();
+            _saveablesObjects.WriteAllDataToContainer();
+            SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
+            
+            ShowAdvExtern();
             restartButton.image.color = Color.gray;
             restartButton.onClick.RemoveListener(RestartLevel);
             StartCoroutine(RestartLevelCoroutine());
