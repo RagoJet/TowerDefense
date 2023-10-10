@@ -1,0 +1,54 @@
+{
+    "idSave": 14,
+    "isFirstSession": false,
+    "language": "ru",
+    "promptDone": false,
+    "money": 1,
+    "newPlayerName": "Hello!",
+    "openLevels": [
+        false,
+        true,
+        false
+    ],
+    "currentLevel": 15,
+    "cellsInformation": [
+        {
+            "indexOfCell": 0,
+            "levelWeapon": 2
+        },
+        {
+            "indexOfCell": 1,
+            "levelWeapon": 2
+        },
+        {
+            "indexOfCell": 2,
+            "levelWeapon": 2
+        },
+        {
+            "indexOfCell": 3,
+            "levelWeapon": 2
+        },
+        {
+            "indexOfCell": 4,
+            "levelWeapon": 5
+        },
+        {
+            "indexOfCell": 5,
+            "levelWeapon": 2
+        },
+        {
+            "indexOfCell": 8,
+            "levelWeapon": 6
+        },
+        {
+            "indexOfCell": 9,
+            "levelWeapon": 7
+        }
+    ],
+    "gold": 65,
+    "priceWeapon": 80,
+    "priceHealth": 130,
+    "maxHealthKing": 816,
+    "levelShopWeapon": 2,
+    "maxLevelOfCreatedWeapon": 7
+}

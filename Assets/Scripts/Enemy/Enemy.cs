@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -66,12 +65,10 @@ public class Enemy : MonoBehaviour{
     private void UpdateHealthUI(int levelOfRace){
         switch (levelOfRace){
             case <4:
-                currentHealthImage.DOFillAmount((float) _currentHealth / _description.maxHealth, 0.5f)
-                    .SetEase(Ease.OutExpo);
+                currentHealthImage.fillAmount = (float) _currentHealth / _description.maxHealth;
                 break;
             default:
-                currentHealthImage.DOFillAmount((float) _currentHealth / (_description.maxHealth * _levelOfGame), 0.5f)
-                    .SetEase(Ease.OutExpo);
+                currentHealthImage.fillAmount = (float) _currentHealth / (_description.maxHealth * _levelOfGame);
                 break;
         }
     }
@@ -121,8 +118,9 @@ public class Enemy : MonoBehaviour{
     public void TakeDamage(int countOfDamage){
         if (_currentHealth <= 0 || _state == StateEnemy.Death) return;
         _currentHealth -= countOfDamage;
-        UpdateHealthUI(_description.enemyData.levelOfRace);
+
         if (_currentHealth <= 0){
+            _currentHealth = 0;
             if (_target.GetState() == KingState.Idle){
                 if (GetEnemyData().levelOfRace == 4){
                     Shop.Instance.AddGoldFromEnemy(GetGold() * _levelOfGame);
@@ -134,6 +132,8 @@ public class Enemy : MonoBehaviour{
 
             PlayDeathState();
         }
+
+        UpdateHealthUI(_description.enemyData.levelOfRace);
     }
 
 

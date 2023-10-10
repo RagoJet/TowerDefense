@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Runtime.InteropServices;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 using Random = UnityEngine.Random;
 
 public enum GameState{
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour, ISaveable{
     public int countOfAliveEnemies;
 
     private DataContainer _dataContainer;
-    private SaveLoadController _saveLoadController;
     private SaveablesObjects _saveablesObjects;
 
     [SerializeField] private ParticleSystem WaveFXHuman;
@@ -46,40 +44,29 @@ public class GameManager : MonoBehaviour, ISaveable{
     [SerializeField] private ParticleSystem WaveFXUndead;
     [SerializeField] private ParticleSystem WaveFXOrc;
 
-    [DllImport("__Internal")]
-    private static extern void LoadJSONFromYAExtern();
 
-    [DllImport("__Internal")]
-    private static extern void SaveJSONToYAExtern(String date);
+    private void OnEnable() => YandexGame.GetDataEvent += Init;
 
-    [DllImport("__Internal")]
-    private static extern void RateGameExtern();
+    private void OnDisable() => YandexGame.GetDataEvent -= Init;
 
-    [DllImport("__Internal")]
-    private static extern string GetLangExtern();
-
-    [DllImport("__Internal")]
-    private static extern void ShowAdvExtern();
-
-
-    private void Start(){
-        LoadJSONFromYAExtern();
+    private void Awake(){
+        if (YandexGame.SDKEnabled == true){
+            Init();
+        }
     }
 
-    public void Pause(){
-        AudioManager.Instance.AudioSource.Pause();
-        Time.timeScale = 0;
-    }
+    private void Init(){
+        _dataContainer = new DataContainer();
 
-    public void UnPause(){
-        AudioManager.Instance.AudioSource.UnPause();
-        Time.timeScale = 1f;
-    }
+        _dataContainer.gold = YandexGame.savesData.gold;
+        _dataContainer.cellsInformation = YandexGame.savesData.cellsInformation;
+        _dataContainer.currentLevel = YandexGame.savesData.currentLevel;
+        _dataContainer.priceHealth = YandexGame.savesData.priceHealth;
+        _dataContainer.priceWeapon = YandexGame.savesData.priceWeapon;
+        _dataContainer.levelShopWeapon = YandexGame.savesData.levelShopWeapon;
+        _dataContainer.maxHealthKing = YandexGame.savesData.maxHealthKing;
+        _dataContainer.maxLevelOfCreatedWeapon = YandexGame.savesData.maxLevelOfCreatedWeapon;
 
-
-    private void Init(string json){
-        _saveLoadController = new SaveLoadController();
-        _dataContainer = _saveLoadController.GetDataContainerFromJSON(json);
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);
         weaponsFactory.Construct(weaponDescriptions, cells, this);
         enemiesFactory.Construct(enemyDescriptions, theKing, theGate, this);
@@ -87,7 +74,7 @@ public class GameManager : MonoBehaviour, ISaveable{
 
         theKing.Construct(this);
         kingHealthUI.Construct(theKing);
-        string lang = GetLangExtern();
+        string lang = YandexGame.savesData.language;
         shop.Construct(weaponsFactory, theKing, lang);
         if (lang.Equals("ru")){
             _currentLevelLang = "Уровень: ";
@@ -123,7 +110,6 @@ public class GameManager : MonoBehaviour, ISaveable{
                 StartHumanWave(level);
                 break;
             case < 21:
-                RateGameExtern();
                 StartElfWave(level);
                 break;
             case < 31:
@@ -212,25 +198,51 @@ public class GameManager : MonoBehaviour, ISaveable{
             countOfAliveEnemies--;
             if (countOfAliveEnemies == 0){
                 _currentGameLevel++;
-                
-                _saveablesObjects.WriteAllDataToContainer();
-                SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
-                
+                SaveProgressYandex();
+
                 StartLevel(_currentGameLevel);
             }
         }
     }
 
+
     public void RestartLevel(){
         if (state == GameState.Stop){
-            _saveablesObjects.WriteAllDataToContainer();
-            SaveJSONToYAExtern(_saveLoadController.ReturnJSONDataContainer(_dataContainer));
-            
-            ShowAdvExtern();
+            if (CurrentGameLevel > 11 && YandexGame.EnvironmentData.reviewCanShow){
+                YandexGame.ReviewShow(false);
+
+                Time.timeScale = 0;
+                AudioManager.Instance.AudioSource.Pause();
+
+
+                YandexGame.ReviewSentEvent += _ => {
+                    Time.timeScale = 1;
+                    AudioManager.Instance.AudioSource.UnPause();
+                };
+            }
+
+            SaveProgressYandex();
+            YandexGame.FullscreenShow();
+
             restartButton.image.color = Color.gray;
             restartButton.onClick.RemoveListener(RestartLevel);
             StartCoroutine(RestartLevelCoroutine());
         }
+    }
+
+    private void SaveProgressYandex(){
+        _saveablesObjects.WriteAllDataToContainer();
+
+        YandexGame.savesData.gold = _dataContainer.gold;
+        YandexGame.savesData.cellsInformation = _dataContainer.cellsInformation;
+        YandexGame.savesData.currentLevel = _dataContainer.currentLevel;
+        YandexGame.savesData.priceHealth = _dataContainer.priceHealth;
+        YandexGame.savesData.priceWeapon = _dataContainer.priceWeapon;
+        YandexGame.savesData.levelShopWeapon = _dataContainer.levelShopWeapon;
+        YandexGame.savesData.maxHealthKing = _dataContainer.maxHealthKing;
+        YandexGame.savesData.maxLevelOfCreatedWeapon = _dataContainer.maxLevelOfCreatedWeapon;
+
+        YandexGame.SaveProgress();
     }
 
     IEnumerator RestartLevelCoroutine(){

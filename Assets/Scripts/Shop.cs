@@ -1,6 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
+using YG;
 
 public class Shop : MonoBehaviour, ISaveable{
     WeaponsFactory weaponsFactory;
@@ -68,11 +68,9 @@ public class Shop : MonoBehaviour, ISaveable{
         UpdateGoldForAdsUI();
     }
 
-    [DllImport("__Internal")]
-    public static extern void WatchAdsExtern();
 
     public void TryWatchAds(){
-        WatchAdsExtern();
+        YandexGame.RewVideoShow(0);
     }
 
     public void AddGoldFromAd(){
