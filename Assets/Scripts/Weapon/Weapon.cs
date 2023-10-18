@@ -10,6 +10,7 @@ public enum WeaponMode{
 
 [RequireComponent(typeof(Collider))]
 public class Weapon : MonoBehaviour{
+    [SerializeField] private ParticleSystem shineParticleFX;
     [SerializeField] private ParticleSystem[] attacksFX;
     private WeaponsFactory _factory;
     private Cell _cell;
@@ -176,5 +177,10 @@ public class Weapon : MonoBehaviour{
 
     private void OnDisable(){
         FreeTheCell();
+    }
+
+    public void MakeShine(){
+        shineParticleFX.gameObject.SetActive(true);
+        shineParticleFX.Play();
     }
 }

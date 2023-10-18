@@ -29,13 +29,16 @@ public class Enemy : MonoBehaviour{
     private int _levelOfGame;
 
     [SerializeField] private Image currentHealthImage;
+    private Canvas _canvasHealth;
 
     private void Awake(){
         _agent = GetComponent<NavMeshAgent>();
         _animations = GetComponent<EnemyAnimations>();
+        _canvasHealth = GetComponentInChildren<Canvas>();
     }
 
     public void Construct(King target, Transform theGateTransform, EnemyDescription description, int levelOfGame){
+        _canvasHealth.gameObject.SetActive(true);
         _levelOfGame = levelOfGame;
         _description = description;
         transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
@@ -47,6 +50,7 @@ public class Enemy : MonoBehaviour{
 
 
     public void Construct(King target, Transform theGateTransform, EnemyDescription description){
+        _canvasHealth.gameObject.SetActive(true);
         _description = description;
         transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
         _target = target;
@@ -56,6 +60,7 @@ public class Enemy : MonoBehaviour{
     }
 
     public void Construct(Transform theGateTransform){
+        _canvasHealth.gameObject.SetActive(true);
         transform.position = theGateTransform.position + new Vector3(Random.Range(-1f, 3f), 0f, Random.Range(-1f, -2f));
         _currentHealth = _description.maxHealth;
         UpdateHealthUI(_description.enemyData.levelOfRace);
@@ -132,12 +137,14 @@ public class Enemy : MonoBehaviour{
 
             PlayDeathState();
         }
-
-        UpdateHealthUI(_description.enemyData.levelOfRace);
+        else{
+            UpdateHealthUI(_description.enemyData.levelOfRace);
+        }
     }
 
 
     public void PlayDeathState(){
+        _canvasHealth.gameObject.SetActive(false);
         _state = StateEnemy.Death;
         _agent.Stop();
         _animations.PlayDeathAnimation();

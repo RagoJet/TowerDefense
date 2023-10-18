@@ -22,6 +22,8 @@ public class Shop : MonoBehaviour, ISaveable{
 
     [SerializeField] private TextMeshProUGUI restartText;
     [SerializeField] private TextMeshProUGUI adsText;
+    [SerializeField] TextMeshProUGUI buyWeaponText;
+    [SerializeField] TextMeshProUGUI buyHealthText;
 
     public static Shop Instance{ get; private set; }
 
@@ -33,10 +35,14 @@ public class Shop : MonoBehaviour, ISaveable{
         if (language.Equals("en")){
             restartText.text = "Restart";
             adsText.text = "Watch ad";
+            buyHealthText.text = "Health";
+            buyWeaponText.text = "Weapon";
         }
         else if (language.Equals("ru")){
             restartText.text = "Рестарт";
             adsText.text = "Смотреть рекламу";
+            buyHealthText.text = "Жизни";
+            buyWeaponText.text = "Оружие";
         }
 
         this.weaponsFactory = weaponsFactory;

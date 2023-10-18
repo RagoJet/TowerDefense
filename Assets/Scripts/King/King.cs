@@ -15,8 +15,6 @@ public class King : MonoBehaviour, ISaveable{
     private KingAnimations _animations;
     private KingState _state;
 
-    private Enemy _enemyTarget;
-
     private int _maxHealth;
     private int _currentHealth;
 
@@ -35,7 +33,6 @@ public class King : MonoBehaviour, ISaveable{
     public void Refresh(){
         _currentHealth = _maxHealth;
         UIHealthEvent.Invoke();
-        _enemyTarget = null;
         if (_state != KingState.Idle){
             _state = KingState.Idle;
             _animations.PlayIdleAnimation();
@@ -52,7 +49,6 @@ public class King : MonoBehaviour, ISaveable{
             _currentHealth = 0;
             _gameManager.StopGame();
             _state = KingState.Death;
-            _enemyTarget = null;
             _animations.PlayDeadAnimation();
             deathKingFx.Play();
         }

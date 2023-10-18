@@ -58,18 +58,13 @@ public class GameManager : MonoBehaviour, ISaveable{
     private void Init(){
         _dataContainer = new DataContainer();
 
-        _dataContainer.gold = YandexGame.savesData.gold;
-        _dataContainer.cellsInformation = YandexGame.savesData.cellsInformation;
-        _dataContainer.currentLevel = YandexGame.savesData.currentLevel;
-        _dataContainer.priceHealth = YandexGame.savesData.priceHealth;
-        _dataContainer.priceWeapon = YandexGame.savesData.priceWeapon;
-        _dataContainer.levelShopWeapon = YandexGame.savesData.levelShopWeapon;
-        _dataContainer.maxHealthKing = YandexGame.savesData.maxHealthKing;
-        _dataContainer.maxLevelOfCreatedWeapon = YandexGame.savesData.maxLevelOfCreatedWeapon;
+        LoadProgressYandex();
+
 
         _saveablesObjects = new SaveablesObjects(_dataContainer, this, weaponsFactory, theKing, shop);
         weaponsFactory.Construct(weaponDescriptions, cells, this);
         enemiesFactory.Construct(enemyDescriptions, theKing, theGate, this);
+
         _saveablesObjects.LoadAllDataFromContainer();
 
         theKing.Construct(this);
@@ -228,6 +223,17 @@ public class GameManager : MonoBehaviour, ISaveable{
             restartButton.onClick.RemoveListener(RestartLevel);
             StartCoroutine(RestartLevelCoroutine());
         }
+    }
+
+    private void LoadProgressYandex(){
+        _dataContainer.gold = YandexGame.savesData.gold;
+        _dataContainer.cellsInformation = YandexGame.savesData.cellsInformation;
+        _dataContainer.currentLevel = YandexGame.savesData.currentLevel;
+        _dataContainer.priceHealth = YandexGame.savesData.priceHealth;
+        _dataContainer.priceWeapon = YandexGame.savesData.priceWeapon;
+        _dataContainer.levelShopWeapon = YandexGame.savesData.levelShopWeapon;
+        _dataContainer.maxHealthKing = YandexGame.savesData.maxHealthKing;
+        _dataContainer.maxLevelOfCreatedWeapon = YandexGame.savesData.maxLevelOfCreatedWeapon;
     }
 
     private void SaveProgressYandex(){
