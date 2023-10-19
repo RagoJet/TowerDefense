@@ -176,6 +176,7 @@ public class Weapon : MonoBehaviour{
     }
 
     private void OnDisable(){
+        _tween.Kill(transform.gameObject);
         FreeTheCell();
     }
 

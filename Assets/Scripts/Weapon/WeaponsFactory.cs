@@ -98,7 +98,8 @@ public class WeaponsFactory : MonoBehaviour, ISaveable{
         for (int i = 0; i < _cells._arrayCells.Length; i++){
             if (!_cells._arrayCells[i].IsAvailable()){
                 if (_cells._arrayCells[i].GetWeapon().GetLevel() < _levelShopWeapon){
-                    Destroy(_cells._arrayCells[i].GetWeapon().gameObject);
+                    _lazyWeaponPool.HideWeapon(_cells._arrayCells[i].GetWeapon());
+                    // Destroy(_cells._arrayCells[i].GetWeapon().gameObject);
                     CreateWeapon(_levelShopWeapon, _cells._arrayCells[i]);
                 }
             }
