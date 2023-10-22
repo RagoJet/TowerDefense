@@ -1,5 +1,5 @@
 {
-    "idSave": 17,
+    "idSave": 3,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -10,37 +10,21 @@
         true,
         false
     ],
-    "currentLevel": 18,
+    "currentLevel": 4,
     "cellsInformation": [
         {
-            "indexOfCell": 0,
-            "levelWeapon": 5
-        },
-        {
             "indexOfCell": 1,
-            "levelWeapon": 5
+            "levelWeapon": 4
         },
         {
-            "indexOfCell": 2,
-            "levelWeapon": 5
-        },
-        {
-            "indexOfCell": 3,
-            "levelWeapon": 5
-        },
-        {
-            "indexOfCell": 5,
-            "levelWeapon": 5
-        },
-        {
-            "indexOfCell": 9,
-            "levelWeapon": 9
+            "indexOfCell": 4,
+            "levelWeapon": 2
         }
     ],
-    "gold": 160,
-    "priceWeapon": 152,
-    "priceHealth": 150,
-    "maxHealthKing": 1090,
-    "levelShopWeapon": 5,
-    "maxLevelOfCreatedWeapon": 9
+    "gold": 61,
+    "priceWeapon": 23,
+    "priceHealth": 20,
+    "maxHealthKing": 24,
+    "levelShopWeapon": 2,
+    "maxLevelOfCreatedWeapon": 4
 }

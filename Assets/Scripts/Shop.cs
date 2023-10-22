@@ -22,8 +22,9 @@ public class Shop : MonoBehaviour, ISaveable{
 
     [SerializeField] private TextMeshProUGUI restartText;
     [SerializeField] private TextMeshProUGUI adsText;
-    [SerializeField] TextMeshProUGUI buyWeaponText;
-    [SerializeField] TextMeshProUGUI buyHealthText;
+    private string _weaponString;
+    private string _healthString;
+
 
     public static Shop Instance{ get; private set; }
 
@@ -35,14 +36,14 @@ public class Shop : MonoBehaviour, ISaveable{
         if (language.Equals("en")){
             restartText.text = "Restart";
             adsText.text = "Watch ad";
-            buyHealthText.text = "Health";
-            buyWeaponText.text = "Weapon";
+            _healthString = @"Health <sprite=""CoinsIcon"" name=""CoinsIcon"">";
+            _weaponString = @"Weapon <sprite=""CoinsIcon"" name=""CoinsIcon"">";
         }
         else if (language.Equals("ru")){
             restartText.text = "Рестарт";
             adsText.text = "Смотреть рекламу";
-            buyHealthText.text = "Жизни";
-            buyWeaponText.text = "Оружие";
+            _healthString = @"Здоровье <sprite=""CoinsIcon"" name=""CoinsIcon"">";
+            _weaponString = @"Оружие <sprite=""CoinsIcon"" name=""CoinsIcon"">";
         }
 
         this.weaponsFactory = weaponsFactory;
@@ -90,11 +91,11 @@ public class Shop : MonoBehaviour, ISaveable{
     }
 
     private void UpdatePriceHealthUI(){
-        priceHealthText.text = _priceHealth.ToString();
+        priceHealthText.text = _healthString + _priceHealth;
     }
 
     private void UpdatePriceWeaponUI(){
-        priceWeaponText.text = _priceWeapon.ToString();
+        priceWeaponText.text = _weaponString + _priceWeapon;
     }
 
     private void UpdateGoldUI(){
