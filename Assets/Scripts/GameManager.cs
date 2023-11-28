@@ -49,11 +49,11 @@ public class GameManager : MonoBehaviour, ISaveable{
 
     private void OnDisable() => YandexGame.GetDataEvent -= Init;
 
-    private void Awake(){
-        if (YandexGame.SDKEnabled == true){
-            Init();
-        }
-    }
+    // private void Start(){
+    //     if (YandexGame.SDKEnabled == true){
+    //         Init();
+    //     }
+    // }
 
     private void Init(){
         _dataContainer = new DataContainer();

@@ -10,7 +10,7 @@
         true,
         false
     ],
-    "currentLevel": 6,
+    "currentLevel": 7,
     "cellsInformation": [
         {
             "indexOfCell": 0,
@@ -22,21 +22,37 @@
         },
         {
             "indexOfCell": 2,
-            "levelWeapon": 2
+            "levelWeapon": 3
         },
         {
             "indexOfCell": 3,
-            "levelWeapon": 4
+            "levelWeapon": 2
         },
         {
             "indexOfCell": 4,
-            "levelWeapon": 5
+            "levelWeapon": 3
+        },
+        {
+            "indexOfCell": 5,
+            "levelWeapon": 2
+        },
+        {
+            "indexOfCell": 6,
+            "levelWeapon": 2
+        },
+        {
+            "indexOfCell": 7,
+            "levelWeapon": 3
+        },
+        {
+            "indexOfCell": 9,
+            "levelWeapon": 4
         }
     ],
-    "gold": 5,
-    "priceWeapon": 33,
+    "gold": 33,
+    "priceWeapon": 34,
     "priceHealth": 30,
     "maxHealthKing": 46,
     "levelShopWeapon": 2,
-    "maxLevelOfCreatedWeapon": 5
+    "maxLevelOfCreatedWeapon": 4
 }

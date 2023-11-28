@@ -27,8 +27,8 @@ namespace YG{
 
         public int maxHealthKing = 12;
         public int levelShopWeapon = 1;
-        public int maxLevelOfCreatedWeapon = 1;
 
+        public int maxLevelOfCreatedWeapon = 1;
         // ...
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
